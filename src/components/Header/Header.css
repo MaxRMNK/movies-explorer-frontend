@@ -1,0 +1,23 @@
+.header {
+  max-width: 1280px;
+  padding: 18px 70px;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+  background-image: url('../../images/logo.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+.header__nav-list {
+  font-size: 12px;
+  line-height: 1.22;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
