@@ -1,0 +1,37 @@
+.footer {
+  background-color: #F8F8F8;
+  display: flex;
+  flex-direction: column;
+  padding: 79px 0 0;
+  margin: 0 70px;
+}
+
+.footer__about {
+  margin: 0;
+  text-align: center;
+  border-bottom: 1px solid #E8E8E8;;
+}
+
+.footer__secondary {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.footer__copy {
+  order: -1;
+  margin: 0;
+}
+
+.footer__nav {}
+
+.footer__nav-list {
+  background-color: aquamarine;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+/* .footer__nav-item {} */

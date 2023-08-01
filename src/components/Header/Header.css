@@ -1,6 +1,7 @@
 .header {
   max-width: 1280px;
   padding: 18px 70px;
+  /* background-color: beige; */
 }
 
 .header__logo {
