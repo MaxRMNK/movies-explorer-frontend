@@ -2,20 +2,26 @@
   background-color: #F8F8F8;
   display: flex;
   flex-direction: column;
-  padding: 79px 0 0;
-  margin: 0 70px;
+  padding: 79px 70px 0 70px;
 }
 
 .footer__about {
-  margin: 0;
+  font-size: 13px;
+  color: #A0A0A0;
   text-align: center;
-  border-bottom: 1px solid #E8E8E8;;
+  margin: 0;
+  padding: 0 0 20px;
+  border-bottom: 1px solid #E8E8E8;
 }
 
 .footer__secondary {
   display: flex;
   justify-content: space-between;
-  margin: 20px 0;
+  padding: 20px 0;
+
+  color: #000;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-size: 13px;
 }
 
 .footer__copy {
@@ -26,7 +32,6 @@
 .footer__nav {}
 
 .footer__nav-list {
-  background-color: aquamarine;
   margin: 0;
   padding: 0;
   list-style: none;

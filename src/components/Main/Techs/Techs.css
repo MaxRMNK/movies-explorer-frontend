@@ -1,8 +1,7 @@
 .techs {
   background-color: #F5F5F5;
-  margin: 0 30px;
-  padding: 100px 0;
-  border-top: 1px dotted #000;
+  /* margin: 0 30px; */
+  padding: 100px 70px;
 }
 
 .techs__content {
@@ -11,8 +10,21 @@
   align-items: center;
 }
 
-.techs-focus {
+.techs__header {
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.16;
+  letter-spacing: -2px;
   margin: 24px 0 26px;
+}
+
+.techs__text {
+  font-size: 14px;
+  line-height: 1.42;
+  letter-spacing: -0.56px;
+  max-width: 460px;
+  margin: 0 0 100px;
+  text-align: center;
 }
 
 .techs__list {

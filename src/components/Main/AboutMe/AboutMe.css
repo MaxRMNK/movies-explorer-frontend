@@ -1,12 +1,11 @@
 .about-me {
-  background-color: #ff9;
-  padding: 0 0 100px;
+  /* background-color: #ff9; */
+  padding: 110px 70px 100px 70px;
 }
 
 .about-me__main-container {
   display: flex;
   justify-content: space-between;
-  background: #fff;
 }
   .about-me__content {
     max-width: 600px;

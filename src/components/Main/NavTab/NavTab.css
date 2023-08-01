@@ -1,7 +1,6 @@
-.promo__nav-tab {}
+.nav-tab {}
 
-.promo__nav-list {
-  /* background-color: #fd0; */
+.nav-tab__list {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -9,11 +8,11 @@
   gap: 10px;
 }
 
-.promo__nav-item {
+.nav-tab__item {
   text-align: center;
 }
 
-.promo__nav-link {
+.nav-tab__link {
   display: block;
   min-width: 96px;
   padding: 10px 14px;
@@ -23,6 +22,6 @@
   text-decoration: none;
 }
 
-.promo__nav-link:hover {
+.nav-tab__link:hover {
   opacity: 0.7;
 }

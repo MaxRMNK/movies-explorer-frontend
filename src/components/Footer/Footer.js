@@ -1,4 +1,3 @@
-// import logo from '../../images/logo.svg';
 import './Footer.css';
 
 function Footer() {
@@ -11,10 +10,10 @@ function Footer() {
         <nav className="footer__nav">
           <ul className="footer__nav-list">
             <li className="footer__nav-item">
-              <a href="https://practicum.yandex.ru/" className="footer__nav-link" target="_blank" rel="noreferrer noopener">Яндекс.Практикум</a>
+              <a href="https://practicum.yandex.ru/" className="footer__nav-link link" target="_blank" rel="noreferrer noopener">Яндекс.Практикум</a>
             </li>
             <li className="footer__nav-item">
-              <a href="https://github.com/" className="footer__nav-link" target="_blank" rel="noreferrer noopener">Github</a>
+              <a href="https://github.com/" className="footer__nav-link link" target="_blank" rel="noreferrer noopener">Github</a>
             </li>
           </ul>
         </nav>
