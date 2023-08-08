@@ -1,9 +1,9 @@
-.main {
+.main-page {
   /* background-color: #4c4; */
   padding: 20px 0 0;
 }
 
-.main-title {
+.main-page__title {
   font-size: 22px;
   font-weight: 400;
   margin: 0 0 66px;

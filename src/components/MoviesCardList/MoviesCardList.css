@@ -1,0 +1,28 @@
+.movies-card-list {
+  padding: 70px 0 0;
+  /* background-color: #c55; */
+}
+
+.elements {
+  display: grid;
+  grid-template-columns: repeat(3, 364px);
+  column-gap: 24px;
+  row-gap: 30px;
+  justify-content: center;
+}
+
+@media (max-width: 1280px) {
+  .elements {
+    grid-template-columns: repeat(2, 339px);
+    column-gap: 30px;
+    row-gap: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .elements {
+    /* padding: 36px 0 0; */
+    row-gap: 16px;
+    grid-template-columns: repeat(1, 300px);
+  }
+}

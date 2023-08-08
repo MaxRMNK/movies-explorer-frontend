@@ -1,20 +1,17 @@
-import './Movies.css';
+import './SavedMovies.css';
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Loader from "../Loader/Loader";
 
-function Movies({films}) {
-
-  // console.log(films);
-
+function SavedMovies({films}) {
   return (
-    <main className="movies">
+    <main className="saved-movies">
       <SearchForm />
-      <MoviesCardList films={films} page='movies' />
+      <MoviesCardList films={films} page='saved-movies' />
       <Loader />
     </main>
   );
 }
 
-export default Movies;
+export default SavedMovies;

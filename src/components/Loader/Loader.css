@@ -1,0 +1,19 @@
+.loader {
+  padding: 73px 0;
+  width: 100%;
+}
+
+.loader__more-button {
+  margin: 7px 0;
+  height: 36px;
+  width: 100%;
+  border-radius: 6px;
+  background: #F4F4F4;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* .loader__more_hidden {
+  visibility: hidden;
+  opacity: 0;
+} */
