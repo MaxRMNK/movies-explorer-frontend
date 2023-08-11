@@ -1,0 +1,123 @@
+.profile {
+  max-width: 410px;
+  margin: 0 auto;
+  /* margin: 0 70px; */
+  padding: 74px 30px 0 30px;
+  /* background-color: #fcc; */
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__greeting {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.form { /* Вынести в index.css */
+  display: flex;
+  flex-direction: column;
+}
+
+.form__edit-profile {
+  /* margin: 0 0 204px; */
+  /* background-color: aquamarine; */
+}
+
+.form__input {
+  position: relative;
+  /* padding: 11px 0; */
+}
+
+.form__input:last-child {
+  /* background-color: #fff; */
+  /* border-bottom: 1px solid #E8E8E8; */
+  /* border-bottom: 1px solid #000; */
+}
+
+  .form__input-label {
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .label_profile {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 100px;
+  }
+
+  .form__input-text {
+    border: none;
+    width: 100%;
+    font-size: 11px;
+    padding: 16px 0;
+    /* background-color: #E8E8E8; */
+    background-color: transparent;
+    border-bottom: 1px solid #E8E8E8;
+    box-sizing: border-box;
+  }
+  .form__input-text_last {
+    border-color: transparent;
+  }
+  .form__input-text:focus {
+    outline: none;
+    border-bottom: 1px solid #3456F3;
+  }
+  .form__input-text:disabled {
+    background-color: transparent;
+  }
+
+  .input-text_align_right {
+    text-align: right;
+  }
+
+  .form__input-error {
+    color: #EE3465;
+    font-size: 10px;
+    padding: 6px 0 0;
+  }
+
+.form__container {
+  display: flex;
+  flex-direction: column;
+  /* background-color: #ff3; */
+  padding: 150px 0 0;
+}
+
+.profile__button {
+  color: #000;
+  /* text-align: center; */
+  font-size: 13px;
+  /* font-weight: 400; */
+  /* background-color: #E8E8E8; */
+  background-color: transparent;
+  border: none;
+  margin: 0 0 6px;
+  padding: 5px;
+}
+
+.profile__button:hover {
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+.profile__button:active {
+  background-color: transparent;
+}
+
+.profile__button_logout {
+  color: #EE3465;
+}
+
+
+.form__button { /* Кнопка "Сохранить изменения" */
+  padding: 13px 0 15px;
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.form__button_submit {
+  margin: 0 0 12px;
+}

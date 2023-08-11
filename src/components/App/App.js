@@ -1,6 +1,6 @@
 // import React from 'react';
 // import { useEffect } from "react";
-import { Navigate, Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route, useLocation } from "react-router-dom";
 
 import './App.css';
 
@@ -18,6 +18,9 @@ import films from "../../utils/db-films-lite";
 
 function App() {
   const isLoggedIn = true;
+
+  const location = useLocation();
+  // console.log(location.pathname);
 
   const filmsSaved =  films.filter(function(film) {
     return film.saved === true;
@@ -37,8 +40,12 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/signup" replace />} />
       </Routes>
-      {/* <Main /> */}
-      <Footer />
+      {
+        location.pathname === '/' ||
+        location.pathname === '/movies' ||
+        location.pathname === '/saved-movies' ?
+        <Footer /> : ''
+      }
     </>
   );
 }

@@ -1,7 +1,5 @@
 import './SearchForm.css';
 
-// import Portfolio from "./Portfolio/Portfolio";
-
 function handleSubmit(e) {
   e.preventDefault();
   console.log('поиск');

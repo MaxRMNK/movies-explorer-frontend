@@ -61,6 +61,16 @@
   background-color:#E8E8E8;
 }
 
+.button:disabled {
+  background-color:#E8E8E8;
+  color: #ccc;
+}
+
+.button_hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
 @media screen and (max-width: 768px) {
   .page {
     background-color: #ffd5d5;
