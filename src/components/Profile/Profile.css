@@ -20,27 +20,15 @@
   flex-direction: column;
 }
 
-.form__edit-profile {
-  /* margin: 0 0 204px; */
-  /* background-color: aquamarine; */
-}
-
 .form__input {
   position: relative;
-  /* padding: 11px 0; */
 }
 
-.form__input:last-child {
-  /* background-color: #fff; */
-  /* border-bottom: 1px solid #E8E8E8; */
-  /* border-bottom: 1px solid #000; */
-}
-
-  .form__input-label {
+  .form__input-label {}
+  .label_profile {
+    color: #000;
     font-size: 11px;
     font-weight: 500;
-  }
-  .label_profile {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -58,7 +46,8 @@
     box-sizing: border-box;
   }
   .form__input-text_last {
-    border-color: transparent;
+    /* border-color: transparent; */
+    border: none;
   }
   .form__input-text:focus {
     outline: none;

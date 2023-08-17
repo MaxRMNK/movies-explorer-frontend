@@ -31,35 +31,42 @@ function Profile() {
     <main className="profile">
       <h1 className="profile__greeting">Привет, {formValue.name}!</h1>
       <form className="form form__edit-profile" id="form__edit-profile" onSubmit={handleSubmit} noValidate>
-        <label className="form__input">
-          <span className="form__input-label label label_profile">Имя</span>
-          <input
-            className="form__input-text input-text input-text_align_right"
-            name="name"
-            id="name"
-            value={formValue.name}
-            onChange={handleChange}
-            disabled={!formEdit}
-            required="true"
-            placeholder="Введите свое имя"
-            // disabled
-            />
-        </label>
-        {/* <span className="form__input-error error error_profile">Какая-то ошибка при редактировании имени пользователя</span> */}
-        <label className="form__input">
-          <span className="form__input-label label label_profile">E-mail</span>
-          <input
-            className="form__input-text form__input-text_last input-text input-text_align_right"
-            name="email"
-            id="email"
-            value={formValue.email}
-            onChange={handleChange}
-            disabled={!formEdit}
-            required="true"
-            placeholder="Укажите адрес электронной почты"
-            // disabled="true"
-            />
-        </label>
+        <div className="form__input-container">
+          <label className="form__input">
+            <span className="form__input-label label label_profile">Имя</span>
+            <input
+              className="form__input-text input-text input-text_align_right"
+              name="name"
+              id="name"
+              type="text"
+              value={formValue.name}
+              onChange={handleChange}
+              disabled={!formEdit}
+              // disabled
+              placeholder="Введите свое имя"
+              required="true"
+              />
+          </label>
+          {/* <span className="form__input-error">Какая-то ошибка при редактировании имени пользователя</span> */}
+        </div>
+        <div className="form__input-container">
+          <label className="form__input">
+            <span className="form__input-label label label_profile">E-mail</span>
+            <input
+              className="form__input-text form__input-text_last input-text input-text_align_right"
+              name="email"
+              id="email"
+              type="email"
+              value={formValue.email}
+              onChange={handleChange}
+              disabled={!formEdit}
+              // disabled="true"
+              placeholder="Укажите адрес электронной почты"
+              required="true"
+              />
+          </label>
+          {/* <span className="form__input-error">Какая-то ошибка при редактировании адреса электронной почты</span> */}
+        </div>
       </form>
       <div className="form__container">
         <button type="submit"

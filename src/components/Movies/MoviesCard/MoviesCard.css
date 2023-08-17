@@ -52,7 +52,7 @@
     flex: 0 0 auto;
     margin-left: 14px;
 
-    background-image: url("../../images/save9d.svg");
+    background-image: url("../../../images/save9d.svg");
     background-repeat: no-repeat;
     background-size: 30px 30px;
     background-position: center center;
@@ -62,11 +62,11 @@
   }
 
   .element__bookmark_active {
-    background-image: url("../../images/save9.svg");
+    background-image: url("../../../images/save9.svg");
   }
 
   .element__bookmark_delete {
-    background-image: url("../../images/d9.svg");
+    background-image: url("../../../images/d9.svg");
   }
 
   .element__bookmark:active {

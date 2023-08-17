@@ -33,7 +33,7 @@
 }
 
 .search__input {
-  background-image: url('../../images/icon-search.svg');
+  background-image: url('../../../images/icon-search.svg');
   background-repeat: no-repeat;
   background-size: 34px 34px;
   background-position: left center;
@@ -57,7 +57,7 @@
   height: 34px;
   margin: 0 0 0 46px;
   background-color: transparent;
-  background-image: url('../../images/icon-find.svg');
+  background-image: url('../../../images/icon-find.svg');
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center center;

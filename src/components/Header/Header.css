@@ -2,6 +2,16 @@
   padding: 18px 70px;
   display: flex;
   justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header__signup,
+.header__signin {
+  width: 100%;
+  max-width: 396px;
+  /* margin: 0 auto; */
+  padding: 70px 30px 40px 30px;
 }
 
 /* .header_logged {

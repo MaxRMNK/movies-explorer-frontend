@@ -19,18 +19,23 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  min-width: 320px;
+  min-width: 300px; /* 320? */
   max-width: 1280px;
   margin: 0 auto;
+  height: 100vh;
   /* box-shadow: 0 0 20px #e5e5e5; */
   /* box-shadow: 0 0 5px #ccc; */
 }
 
-/* .main-wrapper {
-  min-width: 320px;
+.main-wrapper {
+  /* min-width: 320px;
   max-width: 1280px;
-  margin: 0 auto;
-} */
+  margin: 0 auto; */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .link {
   color: #000;
@@ -64,6 +69,7 @@
 .button:disabled {
   background-color:#E8E8E8;
   color: #ccc;
+  pointer-events: none;
 }
 
 .button_hidden {
@@ -81,4 +87,11 @@
   .page {
     background-color: #d5ffea;
   }
+}
+
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 320px) {
 }
