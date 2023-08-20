@@ -6,7 +6,7 @@ function Header( {isLoggedIn, pathName} ) {
   // console.log('isLoggedIn', isLoggedIn);
 
   // const location = useLocation().pathname;
-  console.log(pathName);
+  // console.log(pathName);
 
   /**
    * Для главной: Лого + Регистрация + Вход
@@ -16,7 +16,8 @@ function Header( {isLoggedIn, pathName} ) {
    */
 
   return (
-    <header className={`header ${pathName !== '' ? ('header__'+pathName) : ''} ${isLoggedIn ? 'header_logged' : ''}`}>
+    // <header className={`header ${pathName !== '' ? ('header__'+pathName) : ''} ${isLoggedIn ? 'header_logged' : ''}`}>
+    <header className={`header ${pathName !== '' ? ('header__'+pathName) : ''}`}>
       <Link to="/" className="header__link-logo"><div className="header__logo"></div></Link>
 
       {/* Убирается меню для страниц "Регистрация" и "Вход" */}

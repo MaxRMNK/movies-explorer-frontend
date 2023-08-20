@@ -1,6 +1,9 @@
 .loader {
-  padding: 73px 0;
-  width: 100%;
+  /* margin: 0 70px; */
+  /* padding: 73px 0; */
+  /* padding: 50px 0 80px; */
+  padding: 43px 0 73px;
+  /* width: 100%; */
 }
 
 .loader__more-button {

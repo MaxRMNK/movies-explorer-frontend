@@ -19,7 +19,7 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  min-width: 300px; /* 320? */
+  /* min-width: 320px; */
   max-width: 1280px;
   margin: 0 auto;
   height: 100vh;
@@ -35,6 +35,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.main {
+  width: 100%;
 }
 
 .link {
@@ -77,21 +81,29 @@
   opacity: 0;
 }
 
+
 @media screen and (max-width: 768px) {
   .page {
     background-color: #ffd5d5;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 425px) {
   .page {
     background-color: #d5ffea;
   }
 }
 
+@media screen and (max-width: 321px) {
+  .page {
+    background-color: #f00;
+  }
+}
+
+
 
 @media screen and (max-width: 768px) {
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 425px) {
 }

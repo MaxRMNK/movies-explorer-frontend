@@ -1,62 +1,132 @@
-.about-project {
+.project {
   /* background-color: #fff; */
   /* margin: 0 30px; */
   padding: 110px 70px;
 }
 
-.about-project__container {
+.project__container {
   display: flex;
   gap: 40px;
-  margin: 0 0 110px;
-  padding: 4px 0 0;
+  padding: 70px 0 110px;
 }
-  .about-project__content {
-    flex-grow: 1;
-  }
-    .about-project__title {
-      margin: 0 0 26px;
-      font-size: 20px;
-      font-weight: 400;
-      letter-spacing: -0.8px;
-    }
-    .about-project__paragraph {
-      font-size: 14px;
-      line-height: 1.429;
-    }
 
-.about-project__timeline {
+.project__content {
+  flex-grow: 1;
+}
+
+.project__title {
+  margin: 0 0 26px;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.8px;
+}
+
+.project__paragraph {
+  font-size: 14px;
+  line-height: 1.429;
+  margin: 0
+}
+
+.project__timeline {
   display: flex;
   /* width: 100%; */
 }
-.about-project__time-section {
+
+.project__time-section {
   flex-grow: 1;
   text-align: center;
   font-size: 14px;
 }
-  /* .about-project__time-section_first {
-    flex-grow: 1;
-  } */
-  .about-project__time-section_second {
-    flex-grow: 4;
-  }
 
-.about-project__duration {
+/* .project__time-section_first {} */
+
+.project__time-section_second {
+  flex-grow: 4;
+}
+
+.project__duration {
   padding: 10px;
   background-color: #3456F3;
   color: #fff;
 }
-  /* .about-project__duration_blue {
-    background-color: #3456F3;
-    color: #fff;
-  } */
-  .about-project__duration_grey {
-    background-color: #F2F2F2;
-    color: #000;
-  }
 
-.about-project__caption {
-  margin: 14px;
+/* .project__duration_blue {} */
+
+.project__duration_grey {
+  background-color: #F2F2F2;
+  color: #000;
+}
+
+.project__caption {
+  margin: 0;
+  padding: 14px 0 0;
   color: #A0A0A0;
   font-weight: 500;
   line-height: 1.214;
+  /* font-family: Suisse Intl; */
+  /*
+  Это единственная надпись в проекте сделанная шрифтом НЕ Inter, а Suisse Intl.
+  В бесплатных коллекциях не нашел.
+  Думаю, это какая-то ошибка, не стал его ни покупать, ни пиратить.
+  */
+}
+
+
+@media screen and (max-width: 768px) {
+  .project {
+    padding: 90px 50px;
+  }
+
+  .project__container {
+    gap: 30px;
+    padding: 70px 0 93px;
+  }
+
+  .project__title {
+    margin: 0 0 22px;
+  }
+
+  .project__paragraph {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .project__time-section {
+    font-size: 14px;
+  }
+
+  .project__caption {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .project {
+    padding: 70px 18px;
+  }
+
+  .project__container {
+    flex-direction: column;
+    gap: 56px;
+    padding: 60 0;
+  }
+
+  .project__title {
+    margin: 0 0 16px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .project__paragraph {
+    font-size: 11px;
+    line-height: 1.455;
+  }
+
+  .project__time-section {
+    font-size: 11px;
+  }
+
+  .project__caption {
+    padding: 10px 0 0;
+  }
 }

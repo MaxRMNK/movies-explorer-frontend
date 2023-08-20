@@ -9,7 +9,7 @@ function Movies({films}) {
   // console.log(films);
 
   return (
-    <main className="movies">
+    <main className="movies main">
       <SearchForm />
       <MoviesCardList films={films} page='movies' />
       <Loader />

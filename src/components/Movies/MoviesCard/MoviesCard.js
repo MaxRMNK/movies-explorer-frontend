@@ -46,7 +46,7 @@ const time = `${Math.trunc(duration / 60)}ч ${duration % 60}м`;
       {/* { saved && setBookmark(true) } */}
       <div className="element__caption">
         <div className="element__heading">
-          <h2 className="element__header">{nameRU}</h2>
+          <h2 className="element__header" title={nameRU}>{nameRU}</h2>
           <p className="element__duration">{time}</p>
         </div>
           <button className={bookmarkButtonClassName} type="button" aria-label={bookmarkButtonLabel} onClick={bookmarkClick} />

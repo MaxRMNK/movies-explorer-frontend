@@ -2,7 +2,7 @@
   background-color: #F8F8F8;
   display: flex;
   flex-direction: column;
-  padding: 79px 70px 0 70px;
+  padding: 79px 70px 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -20,9 +20,7 @@
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
-
   color: #000;
-  font-feature-settings: 'clig' off, 'liga' off;
   font-size: 13px;
 }
 
@@ -31,7 +29,7 @@
   margin: 0;
 }
 
-.footer__nav {}
+/* .footer__nav {} */
 
 .footer__nav-list {
   margin: 0;
@@ -42,3 +40,43 @@
 }
 
 /* .footer__nav-item {} */
+
+
+@media screen and (max-width: 768px) {
+  .footer {
+    background-color: transparent;
+    padding: 79px 30px 0;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .footer {
+    padding: 79px 10px 0;
+  }
+
+  .footer__about {
+    font-size: 12px;
+  }
+
+  .footer__secondary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0 20px;
+    font-size: 12px;
+  }
+
+  .footer__nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .footer__copy {
+    color: #A0A0A0;
+    order: 1;
+    padding: 30px 0 0;
+  }
+
+}

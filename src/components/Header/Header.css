@@ -94,6 +94,10 @@
 
 
 @media screen and (max-width: 768px) {
+  .nav {
+    display: none;
+  }
+
   .nav_pages {
     font-size: 22px;
     line-height: normal;
@@ -102,5 +106,12 @@
 
   .nav__link_active {
     text-decoration: underline;
+  }
+}
+
+
+@media screen and (max-width: 425px) {
+  .nav {
+    display: none;
   }
 }

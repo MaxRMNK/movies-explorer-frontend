@@ -6,7 +6,7 @@
   padding: 0 30px;
   display: flex;
   flex-direction: column;
-  background-color: #fcc;
+  /* background-color: #fcc; */
   /* min-height: calc(100vh - 148px); */
 }
 
@@ -74,7 +74,7 @@
   text-align: center;
   /* padding: 134px 0 0; */
   padding: 0 0 70px 0;
-  background-color: #0cc;
+  /* background-color: #0cc; */
   flex-grow: 1;
   justify-content: end;
 }

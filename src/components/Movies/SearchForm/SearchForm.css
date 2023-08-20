@@ -1,20 +1,21 @@
 .search {
-  margin: 0 0 10px 0;
-  padding: 70px 0 0;
-  /* background-color: aqua; */
+  /* margin: 0 70px 10px; */
+  margin: 0 0 10px;
+  padding: 70px 0;
   border-bottom: 1px solid #E8E8E8;
 }
 
+/* .search__form {} */
+
 .search__container {
-  margin: 0 0 70px;
+  /* margin: 0 0 70px; */
   display: flex;
+  justify-content: center;
   align-items: center;
   border-radius: 9px;
   background: #FFF;
   box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
 }
-
-/* .search__form {} */
 
 .search__container-input {
   flex-grow: 1;
@@ -24,10 +25,10 @@
   line-height: 1.111;
 }
 .search__container-toggle {
-  margin: 16px 0;
+  flex-shrink: 0;
+  /* margin: 16px 0; */
   padding: 10px 30px;
   border-left: 1px solid #CBCBCB;
-  /* background-color: aquamarine; */
   font-size: 13px;
   line-height: 1.385;
 }
@@ -40,8 +41,8 @@
   border: none;
   padding: 0 0 0 44px;
   height: 34px;
-  /* background-color: #2BE080; */
   flex-grow: 1;
+  width: 100%;
 }
 
 .search__input::placeholder {
@@ -53,6 +54,7 @@
 }
 
 .search__button {
+  flex-shrink: 0;
   width: 34px;
   height: 34px;
   margin: 0 0 0 46px;
@@ -127,4 +129,56 @@ https://codepen.io/alvarotrigo/pen/YzEdrKj - использованный мет
   position: relative;
 }
 
+/* ************************** ************************** ************************** */
 
+@media screen and (max-width: 768px) {
+  .search {
+    padding: 80px 0 110px;
+    /* background-color: #ff9; */
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .search {
+    padding: 80px 0 0;
+    /* background-color: #9ff; */
+  }
+
+  .search__container {
+    flex-direction: column;
+    align-items: center;
+
+    background: transparent;
+    border-radius: unset;
+    box-shadow: none;
+  }
+
+  .search__container-input {
+    border-radius: 9px;
+    background: #FFF;
+    box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+  }
+
+  .search__container-toggle {
+    border: none;
+    padding: 45px 0;
+  }
+
+  .search__input {
+    background: none;
+    padding: 0;
+  }
+  .search__button {
+    margin: 0 0 0 16px;
+  }
+
+
+}
+
+@media screen and (max-width: 425px) {
+  .search {
+    /* background-color: #9f9; */
+  }
+
+}

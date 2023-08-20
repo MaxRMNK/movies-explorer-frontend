@@ -36,6 +36,7 @@
       /* Если длинный заголовок нужно обрезать */
       text-overflow: ellipsis;
       overflow: hidden;
+      cursor: default; /* Курсор стрелка, для подсветки title так будет удобнее */
     }
 
     .element__duration {
