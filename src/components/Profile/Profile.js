@@ -28,7 +28,7 @@ function Profile() {
   }
 
   return (
-    <main className="profile">
+    <main className="profile main">
       <h1 className="profile__greeting">Привет, {formValue.name}!</h1>
       <form className="form form__edit-profile" id="form__edit-profile" onSubmit={handleSubmit} noValidate>
         <div className="form__input-container">
@@ -44,7 +44,7 @@ function Profile() {
               disabled={!formEdit}
               // disabled
               placeholder="Введите свое имя"
-              required="true"
+              required
               />
           </label>
           {/* <span className="form__input-error">Какая-то ошибка при редактировании имени пользователя</span> */}
@@ -62,14 +62,15 @@ function Profile() {
               disabled={!formEdit}
               // disabled="true"
               placeholder="Укажите адрес электронной почты"
-              required="true"
+              required
               />
           </label>
           {/* <span className="form__input-error">Какая-то ошибка при редактировании адреса электронной почты</span> */}
         </div>
       </form>
       <div className="form__container">
-        <button type="submit"
+        <button
+          type="submit"
           form="form__edit-profile"
           name="Save"
           className={`form__button form__button_submit button ${!formEdit && 'button_hidden'}`}
@@ -77,14 +78,16 @@ function Profile() {
           disabled={!formEdit}
           >Сохранить изменения</button>
 
-        <button type="button"
+        <button
+          type="button"
           name="Edit"
           className={`profile__button profile__button_edit button`}
           // disabled={formEdit}
           onClick={handleEditForm}
           >{!formEdit ? "Редактировать" : "Отменить редактирование"}</button>
 
-        <button type="button"
+        <button
+          type="button"
           name="LogOut"
           className="profile__button profile__button_logout button"
           >Выйти из аккаунта</button>

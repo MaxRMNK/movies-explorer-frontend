@@ -10,7 +10,7 @@ function Auth({
   ...props
 }) {
 
-  console.log(props);
+  // console.log(props);
 
   const isLoading = false;
 
@@ -37,7 +37,7 @@ function Auth({
             minLength="2"
             maxLength="30"
             autoFocus="autofocus"
-            required="true"
+            required
             />
         </label>
         <span className="auth__input-error auth__input-error_name"></span>
@@ -57,7 +57,7 @@ function Auth({
             placeholder=""
             minLength="6"
             autoFocus={formName === 'register' ? '' : 'autofocus'}
-            required="true"
+            required
             />
         </label>
         <span className="auth__input-error auth__input-error_email"></span>

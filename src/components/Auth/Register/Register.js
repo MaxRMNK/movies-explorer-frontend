@@ -25,6 +25,10 @@ function Register() {
         linkTo="/signin"
       />
     </main>
+  );
+}
+
+export default Register;
 
     // <main className="register auth">
     //   <h1 className="auth__header">Добро пожаловать!</h1>
@@ -100,7 +104,3 @@ function Register() {
     //     </div>
     //   </form>
     // </main>
-  );
-}
-
-export default Register;

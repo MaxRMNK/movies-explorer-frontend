@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader";
 
 function SavedMovies({films}) {
   return (
-    <main className="saved-movies">
+    <main className="saved-movies main">
       <SearchForm />
       <MoviesCardList films={films} page='saved-movies' />
       <Loader />

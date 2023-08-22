@@ -1,12 +1,13 @@
 .auth {
   width: 100%;
-  max-width: 396px;
+  max-width: 456px; /* 396px + padding */
   flex-grow: 1;
   margin: 0 auto;
   padding: 0 30px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  /* background-color: #fcc; */
+  /* background-color: #fcf; */
   /* min-height: calc(100vh - 148px); */
 }
 
@@ -109,3 +110,16 @@
   visibility: hidden;
   opacity: 0;
 } */
+
+/* @media screen and (max-width: 768px) {
+} */
+
+@media screen and (max-width: 425px) {
+  .auth__button {
+    font-size: 12px;
+  }
+  .auth__caption {
+    color: #A0A0A0;
+    font-size: 12px;
+  }
+}

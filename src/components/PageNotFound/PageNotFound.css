@@ -53,3 +53,21 @@
   opacity: 0.7;
   cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 425px) {
+  .not-found__header {
+    font-size: 80px;
+    margin: 0 0 10px;
+  }
+
+  .not-found__paragraph {
+    font-size: 12px;
+  }
+
+  .not-found__link {
+    font-size: 12px;
+  }
+}

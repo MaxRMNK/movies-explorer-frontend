@@ -1,11 +1,13 @@
 .profile {
-  max-width: 410px;
+  /* width: 100%; */
+  max-width: 470px; /* 410px + padding */
   margin: 0 auto;
   /* margin: 0 70px; */
-  padding: 74px 30px 0 30px;
+  padding: 74px 30px 0;
+  box-sizing: border-box;
   /* background-color: #fcc; */
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 .profile__greeting {
@@ -46,8 +48,8 @@
     box-sizing: border-box;
   }
   .form__input-text_last {
-    /* border-color: transparent; */
-    border: none;
+    border-color: transparent;
+    /* border: none; */
   }
   .form__input-text:focus {
     outline: none;
@@ -101,7 +103,7 @@
 
 
 .form__button { /* Кнопка "Сохранить изменения" */
-  padding: 13px 0 15px;
+  padding: 15px 0;
   color: #FFF;
   font-size: 14px;
   font-weight: 500;
@@ -109,4 +111,17 @@
 
 .form__button_submit {
   margin: 0 0 12px;
+}
+
+/* @media screen and (max-width: 768px) {
+} */
+
+@media screen and (max-width: 425px) {
+  .profile__button {
+    font-size: 12px;
+  }
+
+  .form__button { /* Кнопка "Сохранить изменения" */
+    font-size: 12px;
+  }
 }
