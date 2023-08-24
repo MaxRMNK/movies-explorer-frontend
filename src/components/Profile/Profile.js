@@ -30,7 +30,7 @@ function Profile() {
   return (
     <main className="profile main">
       <h1 className="profile__greeting">Привет, {formValue.name}!</h1>
-      <form className="form form__edit-profile" id="form__edit-profile" onSubmit={handleSubmit} noValidate>
+      <form className="form form_edit-profile" id="form-edit-profile" onSubmit={handleSubmit} noValidate>
         <div className="form__input-container">
           <label className="form__input">
             <span className="form__input-label label label_profile">Имя</span>
@@ -68,12 +68,12 @@ function Profile() {
           {/* <span className="form__input-error">Какая-то ошибка при редактировании адреса электронной почты</span> */}
         </div>
       </form>
-      <div className="form__container">
+      <div className="profile__container">
         <button
           type="submit"
-          form="form__edit-profile"
+          form="form-edit-profile"
           name="Save"
-          className={`form__button form__button_submit button ${!formEdit && 'button_hidden'}`}
+          className={`profile__button-submit button ${!formEdit && 'button_hidden'}`}
           // className={`profile__button profile__button_submit button ${!formEdit && 'button_hidden'}`}
           disabled={!formEdit}
           >Сохранить изменения</button>

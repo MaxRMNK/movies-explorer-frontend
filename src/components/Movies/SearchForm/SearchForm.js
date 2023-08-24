@@ -17,13 +17,20 @@ function SearchForm() {
         <div className="search__container">
 
           <div className="search__container-input">
-            <input type="text" id="name" name="name" placeholder="Фильм" spellCheck="true" className="search__input" />
+            <input
+              className="search__input"
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Фильм"
+              spellCheck="true"
+            />
             <button type="submit" name="Search" className="search__button button" />
           </div>
 
           <div className="search__container-toggle">
             <label className="search__label">
-              <input className="search__checkbox" type="checkbox" />
+              <input className="search__checkbox" placeholder="Короткометражки" type="checkbox" />
               <div className="search__toggle" onClick={handleClick}></div>
               <span className="search__toggle-label">Короткометражки</span>
             </label>

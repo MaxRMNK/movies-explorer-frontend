@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom";
+import Logo from "../../Header/Logo/Logo";
 import Auth from "../Auth";
 
 // import './Login.css';
@@ -15,18 +15,22 @@ function Login() {
 
   return (
     <main className="auth">
-      <h1 className="auth__header">Рады видеть!</h1>
-      <Auth
-        formName="login"
-        // formInput={{name: "Имя", email: "E-mail", password: "Пароль"}}
-        // header="Рады видеть!"
-        buttonTitle="Войти"
-        buttonTitleSend="Вход..."
-        caption="Ещё не зарегистрированы?"
-        link="Регистрация"
-        linkTo="/signup"
-        // sdfsdf="sdfsdfseeeee"
-      />
+      <div className="auth__container">
+        <div className="auth__logo"><Logo /></div>
+
+        <h1 className="auth__header">Рады видеть!</h1>
+        <Auth
+          formName="login"
+          // formInput={{name: "Имя", email: "E-mail", password: "Пароль"}}
+          // header="Рады видеть!"
+          buttonTitle="Войти"
+          buttonTitleSend="Вход..."
+          caption="Ещё не зарегистрированы?"
+          link="Регистрация"
+          linkTo="/signup"
+          // sdfsdf="sdfsdfseeeee"
+        />
+      </div>
     </main>
 
     // <main className="login auth">

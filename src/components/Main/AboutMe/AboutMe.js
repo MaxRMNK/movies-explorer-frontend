@@ -13,7 +13,15 @@ function AboutMe() {
             У меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
             С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке,
             начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
-          <p className="about-me__link-list"><a href="https://github.com/MaxRMNK/" className="about-me__link">Github</a></p>
+          <p className="about-me__link-list">
+            <a href="https://github.com/MaxRMNK/"
+              target="_blank"
+              className="about-me__link link"
+              rel="noreferrer noopener"
+              >
+                Github
+              </a>
+            </p>
           {/* <ul>
             <li>Github</li>
             <li>GitLab</li>
@@ -23,7 +31,7 @@ function AboutMe() {
             <li>Stack Overflow</li>
           </ul> */}
         </div>
-        <img src={photo} className="about-me__photo" alt="" />
+        <img src={photo} className="about-me__photo" alt="Мое фото" />
       </div>
     </section>
   );

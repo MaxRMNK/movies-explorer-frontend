@@ -23,6 +23,7 @@
   padding: 19px;
   font-size: 18px;
   line-height: 1.111;
+  width: 100%;
 }
 .search__container-toggle {
   flex-shrink: 0;
@@ -39,6 +40,7 @@
   background-size: 34px 34px;
   background-position: left center;
   border: none;
+  /* border-bottom: 1px solid #fff; */
   padding: 0 0 0 44px;
   height: 34px;
   flex-grow: 1;
@@ -51,6 +53,14 @@
 
 .search__input:focus {
   outline: none;
+  border-bottom: 1px solid #3456F3;
+  box-sizing: border-box;
+
+  background-image: none;
+  padding: 0;
+}
+.search__input:focus::placeholder {
+  color: #fff;
 }
 
 .search__button {
@@ -169,6 +179,7 @@ https://codepen.io/alvarotrigo/pen/YzEdrKj - использованный мет
     background: none;
     padding: 0;
   }
+
   .search__button {
     margin: 0 0 0 16px;
   }

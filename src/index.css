@@ -84,19 +84,19 @@
 
 @media screen and (max-width: 768px) {
   .page {
-    /* background-color: #ffd5d5; */
+    background-color: #ffd5d5;
   }
 }
 
 @media screen and (max-width: 425px) {
   .page {
-    /* background-color: #d5ffea; */
+    background-color: #d5ffea;
   }
 }
 
 @media screen and (max-width: 321px) {
   .page {
-    /* background-color: #f00; */
+    background-color: #f00;
   }
 }
 

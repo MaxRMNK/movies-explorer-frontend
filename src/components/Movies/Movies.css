@@ -3,7 +3,7 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 930px) {
   .movies {
     padding: 0 30px;
   }
@@ -15,7 +15,7 @@
   }
 } */
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 525px) {
   .movies {
     padding: 0 10px;
   }

@@ -21,7 +21,7 @@ function Auth({
   }
 
   return (
-    <form className={`auth__form auth__form_${formName}`} id={`form_${formName}`} name={formName} onSubmit={handleSubmit} noValidate>
+    <form className={`auth__form auth__form_${formName}`} id={`form-${formName}`} name={formName} onSubmit={handleSubmit} noValidate>
       { formName === "register" && (
       <div className="auth__input-container">
         <label className="auth__label auth__label_name">
@@ -33,9 +33,10 @@ function Auth({
             type="text"
             // value={formValue.name}
             // onChange={handleChange}
-            placeholder=""
+            placeholder="Виталий"
             minLength="2"
             maxLength="30"
+            value=""
             autoFocus="autofocus"
             required
             />
@@ -54,8 +55,10 @@ function Auth({
             type="email"
             // value={formValue.email}
             // onChange={handleChange}
-            placeholder=""
+            placeholder="email@yandex.ru"
             minLength="6"
+            maxLength="40"
+            value=""
             autoFocus={formName === 'register' ? '' : 'autofocus'}
             required
             />
@@ -73,9 +76,10 @@ function Auth({
             type="password"
             // value={formValue.email}
             // onChange={handleChange}
-            placeholder=""
+            // placeholder="d$r-R#Pf65)K%^"
             minLength="2"
             maxLength="30"
+            value=""
             required
             />
         </label>
@@ -93,7 +97,7 @@ function Auth({
           <Link to="/signup" className="auth__link">Регистрация</Link>
         </p> */}
         <p className='auth__caption'>{caption} {" "}
-          <Link to={linkTo} className="auth__link">{link}</Link>
+          <Link to={linkTo} className="auth__link link">{link}</Link>
         </p>
 
       </div>

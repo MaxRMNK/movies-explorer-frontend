@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom";
+import Logo from "../../Header/Logo/Logo";
 import Auth from "../Auth";
 
 // import './Register.css';
@@ -15,15 +15,18 @@ function Register() {
 
   return (
     <main className="auth">
-      <h1 className="auth__header">Добро пожаловать!</h1>
-      <Auth
-        formName="register"
-        buttonTitle="Зарегистрироваться"
-        buttonTitleSend="Регистрация..."
-        caption="Уже зарегистрированы?"
-        link="Войти"
-        linkTo="/signin"
-      />
+      <div className="auth__container">
+        <div className="auth__logo"><Logo /></div>
+        <h1 className="auth__header">Добро пожаловать!</h1>
+        <Auth
+          formName="register"
+          buttonTitle="Зарегистрироваться"
+          buttonTitleSend="Регистрация..."
+          caption="Уже зарегистрированы?"
+          link="Войти"
+          linkTo="/signin"
+        />
+      </div>
     </main>
   );
 }

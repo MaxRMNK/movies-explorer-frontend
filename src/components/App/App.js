@@ -56,11 +56,11 @@ function App() {
           <Profile />
         </>} />
         <Route path="/signin" element={<>
-          <Header isLoggedIn={isLoggedIn} pathName={pathName} />
+          {/* <Header isLoggedIn={isLoggedIn} pathName={pathName} /> */}
           <Login />
         </>} />
         <Route path="/signup" element={<>
-          <Header isLoggedIn={isLoggedIn} pathName={pathName} />
+          {/* <Header isLoggedIn={isLoggedIn} pathName={pathName} /> */}
           <Register />
         </>} />
         <Route path="*" element={<PageNotFound />} />

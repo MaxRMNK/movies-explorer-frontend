@@ -92,14 +92,13 @@
   cursor: pointer;
 } */
 
-
-@media (max-width: 1280px) {
+@media (max-width: 930px) {
   .element__image {
     height: 190px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 525px) {
   .element__image {
     height: 168px;
   }

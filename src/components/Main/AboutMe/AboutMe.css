@@ -42,9 +42,6 @@
       color: #000;
       text-decoration: none;
     }
-    .about-me__link:hover {
-      opacity: 0.7;
-    }
 
   .about-me__photo {
     width: 270px;

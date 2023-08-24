@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink, Link } from "react-router-dom"; // Routes, Route,
 
+import Logo from "./Logo/Logo";
 import './Header.css';
 
 function Header( {isLoggedIn, pathName} ) {
@@ -24,8 +25,9 @@ function Header( {isLoggedIn, pathName} ) {
 
   return (
     // <header className={`header ${pathName !== '' ? ('header__'+pathName) : ''} ${isLoggedIn ? 'header_logged' : ''}`}>
-    <header className={`header ${pathName !== '' ? ('header__'+pathName) : ''}`}>
-      <Link to="/" className="header__link-logo"><div className="header__logo"></div></Link>
+    <header className={`header ${pathName !== '' ? ('header_'+pathName) : ''}`}>
+      {/* <Link to="/" className="header__link-logo"><div className="header__logo"></div></Link> */}
+      <Logo />
 
       {/* Убирается меню для страниц "Регистрация" и "Вход" */}
       {pathName === 'signin' || pathName === 'signup' ? '' : (<>
@@ -43,7 +45,7 @@ function Header( {isLoggedIn, pathName} ) {
 
           <>
           <button
-            className="nav__burger-button button"
+            className="header__burger-button button"
             type="button"
             arial-label="Меню"
             onClick={togleBtn}
@@ -60,7 +62,7 @@ function Header( {isLoggedIn, pathName} ) {
 
             <ul className="nav__list nav__list_auth">
             {/* <ul className={`nav__list ${btnStatus ? 'nav__list_open' : ''}`}> */}
-            <li className="nav__item nav__item_auth"><NavLink
+              <li className="nav__item nav__item_auth nav__item_hide-full-screen"><NavLink
                 to="/"
                 className={({isActive}) => `nav__link link ${isActive ? 'nav__link_active' : ''}`}
                 >Главная</NavLink></li>
