@@ -22,6 +22,8 @@ function SearchForm() {
               type="text"
               id="name"
               name="name"
+              minLength="2"
+              maxLength="100"
               placeholder="Фильм"
               spellCheck="true"
             />

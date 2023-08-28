@@ -59,6 +59,9 @@
   background-image: none;
   padding: 0;
 }
+.search__input:invalid {
+  color: #EE3465;
+}
 .search__input:focus::placeholder {
   color: #fff;
 }

@@ -79,6 +79,11 @@
 
   .nav__item {
     margin: 0 0 0 20px;
+    /* margin: 0 0 0 24px; */
+  }
+
+  .nav__item_auth {
+    margin: 0 0 0 22px;
   }
 
     /* .nav__link {} */
@@ -101,7 +106,8 @@
     }
 
     .nav__link-profile {
-      margin: 3px 0 3px 10px;
+      /* margin: 3px 0 3px 10px; */
+      margin: 3px 0 3px 26px;
       padding: 8px 12px 8px 31px;
       border: 2px solid rgba(170, 170, 170, 0.2);
       border-radius: 50px;
@@ -125,7 +131,7 @@
   }
 
   .header__nav_auth {
-    font-size: 22px;
+    font-size: 18px;
     line-height: normal;
     font-weight: 500;
 
@@ -157,13 +163,15 @@
 
     background-image: url('../../images/burger-btn.svg');
     background-repeat: no-repeat;
-    /* background-size: 44px 44px; */
-    background-size: 38px 38px;
+    background-size: 44px 44px;
+    /* background-size: 38px 38px; */
     background-position: center;
     border: none;
     outline: none;
     background-color: transparent;
-    width: 38px;
+    /* width: 38px;
+    height: 38px; */
+    width: 44px;
     height: 38px;
     /* position: absolute;
     right: 15px; */
@@ -181,12 +189,12 @@
     background-size: 38px 38px;
     background-position: center;
 
-    width: 38px;
-    height: 38px;
+    width: 17px;
+    height: 16px;
     padding: 0;
     position: absolute;
-    top: 22px;
-    right: 22px;
+    top: 30px;
+    right: 30px;
   }
 
   /* .nav__list {
@@ -229,10 +237,13 @@
 
   .nav__link-profile {
     margin: 0;
+    font-size: 14px;
   }
 
   .nav__link_active {
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    padding: 0 0 4px;
+    border-bottom: 1px solid #000;
   }
 }
 

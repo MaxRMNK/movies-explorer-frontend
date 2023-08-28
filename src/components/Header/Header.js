@@ -74,7 +74,7 @@ function Header( {isLoggedIn, pathName} ) {
                 to="/saved-movies"
                 className={({isActive}) => `nav__link link ${isActive ? 'nav__link_active' : ''}`}
                 >Сохраненные фильмы</NavLink></li>
-              <li className="nav__item nav__item_profile"><NavLink
+              <li className="nav__item nav__item_auth nav__item_profile"><NavLink
                 to="/profile"
                 className={({isActive}) => `nav__link-profile link ${isActive ? 'nav__link-profile_active' : ''}`}
                 >Аккаунт</NavLink></li>

@@ -96,4 +96,8 @@
     letter-spacing: -0.44px;
     margin-bottom: 50px;
   }
+
+  .techs__list {
+    grid-template-columns: repeat(2, 84px);
+  }
 }

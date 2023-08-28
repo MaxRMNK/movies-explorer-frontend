@@ -36,7 +36,7 @@ function Auth({
             placeholder="Виталий"
             minLength="2"
             maxLength="30"
-            value=""
+            // value=""
             autoFocus="autofocus"
             required
             />
@@ -58,7 +58,7 @@ function Auth({
             placeholder="email@yandex.ru"
             minLength="6"
             maxLength="40"
-            value=""
+            // value=""
             autoFocus={formName === 'register' ? '' : 'autofocus'}
             required
             />
@@ -79,7 +79,7 @@ function Auth({
             // placeholder="d$r-R#Pf65)K%^"
             minLength="2"
             maxLength="30"
-            value=""
+            // value=""
             required
             />
         </label>

@@ -1,13 +1,19 @@
 .profile {
   /* width: 100%; */
+  height: 100%;
   max-width: 470px; /* 410px + padding */
   margin: 0 auto;
-  /* margin: 0 70px; */
+  /* box-sizing: border-box; */
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__container {
   padding: 74px 30px 0;
-  box-sizing: border-box;
-  /* background-color: #fcc; */
-  /* display: flex;
-  flex-direction: column; */
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile__greeting {
@@ -15,7 +21,7 @@
   font-size: 24px;
   font-weight: 500;
   line-height: normal;
-}
+  margin: 0 0 110px}
 
 .form { /* Вынести в index.css */
   display: flex;
@@ -27,6 +33,7 @@
 }
 
   .form__input-label {}
+
   .label_profile {
     color: #000;
     font-size: 11px;
@@ -42,7 +49,6 @@
     width: 100%;
     font-size: 11px;
     padding: 16px 0;
-    /* background-color: #E8E8E8; */
     background-color: transparent;
     border-bottom: 1px solid #E8E8E8;
     box-sizing: border-box;
@@ -58,6 +64,9 @@
   .form__input-text:disabled {
     background-color: transparent;
   }
+  .form__input-text:invalid {
+    color: #EE3465;
+  }
 
   .input-text_align_right {
     text-align: right;
@@ -69,19 +78,18 @@
     padding: 6px 0 0;
   }
 
-.profile__container {
+.profile__buttons {
   display: flex;
   flex-direction: column;
-  /* background-color: #ff3; */
-  padding: 150px 0 0;
+  padding: 40px 0 60px;
+
+  flex-grow: 1;
+  justify-content: flex-end;
 }
 
 .profile__button {
   color: #000;
-  /* text-align: center; */
   font-size: 13px;
-  /* font-weight: 400; */
-  /* background-color: #E8E8E8; */
   background-color: transparent;
   border: none;
   margin: 0 0 6px;
@@ -89,7 +97,7 @@
 }
 
 .profile__button:hover {
-  text-decoration: underline;
+  /* text-decoration: underline; */
   background-color: transparent;
 }
 
@@ -110,15 +118,43 @@
   margin: 0 0 12px;
 }
 
-/* @media screen and (max-width: 768px) {
-} */
+@media screen and (max-width: 768px) {
+  .profile {
+    justify-content: center;
+  }
+
+  .profile__container {
+    padding: 20px 30px 44px;
+    max-height: 454px;
+  }
+
+  .profile__greeting {
+    margin: 0 0 84px;
+  }
+
+  .profile__buttons {
+    padding: 40px 0 0;
+  }
+
+
+}
 
 @media screen and (max-width: 425px) {
+  .profile__container {
+    padding: 70px 30px 30px;
+
+    max-height: unset;
+  }
+
+  .profile__greeting {
+    margin: 0 0 68px;
+  }
+
   .profile__button {
     font-size: 12px;
   }
 
-  .form__button { /* Кнопка "Сохранить изменения" */
+  .profile__button-submit { /* Кнопка "Сохранить изменения" */
     font-size: 12px;
   }
 }
