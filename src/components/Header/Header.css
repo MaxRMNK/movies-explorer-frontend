@@ -263,10 +263,26 @@
   }
 
   .nav__list_auth {
-    padding: 144px 0 46px;
+    padding: 140px 0 44px;
     width: 100%;
   }
 
+  .nav__item_auth {
+    margin: 0 0 18px;
+  }
 
+  .nav__link_active {
+    padding: 0 0 8px;
+  }
 
+  .nav__item_profile {
+    margin: 0;
+  }
+
+  .nav__close-button {
+    width: 18px;
+    height: 18px;
+    top: 20px;
+    right: 20px;
+  }
 }
