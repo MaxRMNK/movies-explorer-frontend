@@ -1,0 +1,198 @@
+.search {
+  /* margin: 0 70px 10px; */
+  margin: 0 0 10px;
+  padding: 70px 0;
+  border-bottom: 1px solid #E8E8E8;
+}
+
+/* .search__form {} */
+
+.search__container {
+  /* margin: 0 0 70px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px;
+  background: #FFF;
+  box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+}
+
+.search__container-input {
+  flex-grow: 1;
+  display: flex;
+  padding: 19px;
+  font-size: 18px;
+  line-height: 1.111;
+  width: 100%;
+}
+.search__container-toggle {
+  flex-shrink: 0;
+  /* margin: 16px 0; */
+  padding: 10px 30px;
+  border-left: 1px solid #CBCBCB;
+  font-size: 13px;
+  line-height: 1.385;
+}
+
+.search__input {
+  background-image: url('../../../images/icon-search.svg');
+  background-repeat: no-repeat;
+  background-size: 34px 34px;
+  background-position: left center;
+  border: none;
+  /* border-bottom: 1px solid #fff; */
+  padding: 0 0 0 44px;
+  height: 34px;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.search__input::placeholder {
+  color: #A0A0A0;
+}
+
+.search__input:focus {
+  outline: none;
+  border-bottom: 1px solid #3456F3;
+  box-sizing: border-box;
+
+  background-image: none;
+  padding: 0;
+}
+.search__input:invalid {
+  color: #EE3465;
+}
+.search__input:focus::placeholder {
+  color: #fff;
+}
+
+.search__button {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  margin: 0 0 0 46px;
+  background-color: transparent;
+  background-image: url('../../../images/icon-find.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
+
+.search__button:active {
+  background-color: transparent;
+  filter: opacity(80%);
+  /* border-radius: 50%;
+  box-sizing: border-box;
+  border: 1px solid #999; */
+  /* filter: drop-shadow(0 0 1px #666); */
+  /* filter: brightness(120%); */
+}
+
+
+/*
+https://alvarotrigo.com/blog/toggle-switch-css/ - стилизация чекбоксов
+https://codepen.io/alvarotrigo/pen/YzEdrKj - использованный метод
+*/
+.search__label {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.search__toggle {
+  display: inline-block;
+  background-color: #EBEBEB;
+  border-radius: 16px;
+  width: 36px;
+  height: 20px;
+  position: relative;
+  vertical-align: middle;
+  transition: background-color 0.25s;
+}
+
+.search__toggle:before, .search__toggle:after {
+  content: "";
+}
+
+.search__toggle:before {
+  display: block;
+  background-color: #F5F5F5;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  /* box-sizing: border-box; */
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: left 0.25s;
+}
+
+.search__checkbox:checked + .search__toggle:before {
+  left: 18px;
+  background-color: #2BE080;
+}
+
+.search__checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+
+.search__toggle-label {
+  margin-left: 14px;
+  position: relative;
+}
+
+/* ************************** ************************** ************************** */
+
+@media screen and (max-width: 768px) {
+  .search {
+    padding: 80px 0 110px;
+    /* background-color: #ff9; */
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .search {
+    padding: 80px 0 0;
+    /* background-color: #9ff; */
+  }
+
+  .search__container {
+    flex-direction: column;
+    align-items: center;
+
+    background: transparent;
+    border-radius: unset;
+    box-shadow: none;
+  }
+
+  .search__container-input {
+    border-radius: 9px;
+    background: #FFF;
+    box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+  }
+
+  .search__container-toggle {
+    border: none;
+    padding: 45px 0;
+  }
+
+  .search__input {
+    background: none;
+    padding: 0;
+  }
+
+  .search__button {
+    margin: 0 0 0 16px;
+  }
+
+
+}
+
+@media screen and (max-width: 425px) {
+  .search {
+    /* background-color: #9f9; */
+  }
+
+}

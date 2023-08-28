@@ -1,0 +1,31 @@
+.main-page {
+  /* background-color: #4c4; */
+  padding: 20px 0 0;
+  /* width: 100%; */
+}
+
+.main-page__title {
+  font-size: 22px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0 0 23px;
+  letter-spacing: -0.88px;
+  border-bottom: 1px solid #000;
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 425px) {
+  .main-page {
+    padding: 14px 0 0;
+  }
+
+  .main-page__title {
+    font-size: 18px;
+    padding: 0 0 28px;
+    letter-spacing: -0.72px;
+  }
+
+}

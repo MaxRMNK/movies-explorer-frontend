@@ -1,0 +1,13 @@
+.logo {
+  display: inline-block;
+}
+
+.logo__image {
+  display: block;
+  width: 38px;
+  height: 38px;
+  background-image: url('../../../images/logo.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+}
