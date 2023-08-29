@@ -41,6 +41,9 @@ function App() {
           <Main />
           <Footer />
         </>} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+
         <Route path="/movies" element={<>
           <Header isLoggedIn={isLoggedIn} pathName={pathName} />
           <Movies films={films} />
@@ -55,14 +58,7 @@ function App() {
           <Header isLoggedIn={isLoggedIn} pathName={pathName} />
           <Profile />
         </>} />
-        <Route path="/signin" element={<>
-          {/* <Header isLoggedIn={isLoggedIn} pathName={pathName} /> */}
-          <Login />
-        </>} />
-        <Route path="/signup" element={<>
-          {/* <Header isLoggedIn={isLoggedIn} pathName={pathName} /> */}
-          <Register />
-        </>} />
+
         <Route path="*" element={<PageNotFound />} />
         {/* <Route path="*" element={isLoggedIn ? <Navigate to="/" replace /> : <Navigate to="/signup" replace />} /> */}
       </Routes>

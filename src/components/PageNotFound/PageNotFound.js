@@ -1,14 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; // useNavigate
 
 import './PageNotFound.css';
 
 function PageNotFound() {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const goHome = () => {
-    navigate(-1, { replace: true });
-  };
+  // const goHome = () => {
+  //   navigate(-1, { replace: true });
+  // };
 
   return (
     <main className="not-found">
