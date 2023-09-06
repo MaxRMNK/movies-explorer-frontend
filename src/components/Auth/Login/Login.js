@@ -1,16 +1,21 @@
+import React from 'react';
+
 import Logo from "../../Header/Logo/Logo";
 import Auth from "../Auth";
 
 // import './Login.css';
 
-function Login() {
+function Login({ onLogin }) {
+
+  const [formValue, setFormValue] = React.useState({ email: '', password: '' });
 
   // const isLoading = false;
 
   // function handleSubmit(e) {
   //   e.preventDefault();
-  //   console.log('Отправка формы входа');
+  //   console.log('Отправка формы входа', e);
   //   // setFormEdit(false);
+  //   // onLogin(values);
   // }
 
   return (
@@ -28,7 +33,10 @@ function Login() {
           caption="Ещё не зарегистрированы?"
           link="Регистрация"
           linkTo="/signup"
-          // sdfsdf="sdfsdfseeeee"
+
+          submitForm={onLogin}
+          formValue={formValue}
+          setFormValue={setFormValue}
         />
       </div>
     </main>

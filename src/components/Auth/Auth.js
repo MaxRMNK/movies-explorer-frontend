@@ -1,4 +1,7 @@
+import React from 'react';
 import { Link } from "react-router-dom";
+
+// import { useForm } from '../hooks/useForm';
 
 import './Auth.css';
 
@@ -7,17 +10,34 @@ function Auth({
   // header,
   buttonTitle, buttonTitleSend,
   caption, link, linkTo,
+  formValue, setFormValue,
+  submitForm,
   ...props
 }) {
-
+  const isLoading = false;
   // console.log(props);
 
-  const isLoading = false;
+  // const {values, handleChange, setValues} = useForm({ email: '', password: '' })
+
+  // const [formValue, setFormValue] = React.useState({ name: '', email: '', password: '' });
+  // const [formValue, setFormValue] = React.useState({});
+
+  const handleChange = (evt) => {
+    const {name, value} = evt.target;
+    setFormValue({
+      ...formValue,
+      [name]: value
+    });
+  };
+
+  // console.log(formValue);
 
   function handleSubmit(e) {
     e.preventDefault();
     console.log(`Отправка формы ${formName}`);
     // setFormEdit(false);
+
+    submitForm(formValue);
   }
 
   return (
@@ -31,12 +51,11 @@ function Auth({
             name="name"
             id="name"
             type="text"
-            // value={formValue.name}
-            // onChange={handleChange}
+            value={formValue.name}
+            onChange={handleChange}
             placeholder="Виталий"
             minLength="2"
             maxLength="30"
-            // value=""
             autoFocus="autofocus"
             required
             />
@@ -53,12 +72,11 @@ function Auth({
             name="email"
             id="email"
             type="email"
-            // value={formValue.email}
-            // onChange={handleChange}
+            value={formValue.email}
+            onChange={handleChange}
             placeholder="email@yandex.ru"
             minLength="6"
             maxLength="40"
-            // value=""
             autoFocus={formName === 'register' ? '' : 'autofocus'}
             required
             />
@@ -74,12 +92,11 @@ function Auth({
             name="password"
             id="password"
             type="password"
-            // value={formValue.email}
-            // onChange={handleChange}
+            value={formValue.password}
+            onChange={handleChange}
             // placeholder="d$r-R#Pf65)K%^"
             minLength="2"
             maxLength="30"
-            // value=""
             required
             />
         </label>

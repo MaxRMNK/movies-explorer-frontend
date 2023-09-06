@@ -1,13 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './Profile.css';
 
-function Profile() {
+function Profile({ onSignOut, userData, onUpdateUser}) {
 
   const [formValue, setFormValue] = useState({ name: 'Виталий', email: 'pochta@yandex.ru' });
-  const [formEdit, setFormEdit] = useState(false);
+  const [formEdit, setFormEdit] = useState(false); // Редактирование профиля
 
   // let togleClassCheck = !formEdit ? ' form__button_hidden' : '';
+
+  useEffect(() => {
+    setFormValue(userData)
+  }, [userData]);
 
   const handleEditForm = () => {
     setFormEdit(formEdit => !formEdit);
@@ -23,7 +27,10 @@ function Profile() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('сохранить профиль');
+    // console.log('сохранить профиль', e);
+    // console.log('formValue', formValue);
+
+    onUpdateUser(formValue)
     setFormEdit(false);
   }
 
@@ -95,6 +102,7 @@ function Profile() {
             type="button"
             name="LogOut"
             className="profile__button profile__button_logout button"
+            onClick={onSignOut}
             >Выйти из аккаунта</button>
         </div>
 

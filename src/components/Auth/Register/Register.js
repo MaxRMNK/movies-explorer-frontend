@@ -1,9 +1,13 @@
+import React from 'react';
+
 import Logo from "../../Header/Logo/Logo";
 import Auth from "../Auth";
 
 // import './Register.css';
 
-function Register() {
+function Register({ onRegister }) {
+
+  const [formValue, setFormValue] = React.useState({ name: '', email: '', password: '' });
 
   // const isLoading = false;
 
@@ -25,6 +29,10 @@ function Register() {
           caption="Уже зарегистрированы?"
           link="Войти"
           linkTo="/signin"
+
+          submitForm={onRegister}
+          formValue={formValue}
+          setFormValue={setFormValue}
         />
       </div>
     </main>
