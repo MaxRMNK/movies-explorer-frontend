@@ -7,13 +7,12 @@
   position: relative;
 }
 
-.header_signup,
+/* .header_signup,
 .header_signin {
   width: 100%;
   max-width: 396px;
-  /* margin: 0 auto; */
   padding: 70px 0 40px;
-}
+} */
 
 /* .header_logged {
   background-color: bisque;

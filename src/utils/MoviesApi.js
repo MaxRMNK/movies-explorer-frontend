@@ -1,6 +1,6 @@
 // import { BASE_URL_MOVIES } from "./utils"
 
-const baseUrlMovies = 'https://api.nomoreparties.co/beatfilm-movies';
+const baseUrlMovies = 'https://api.nomoreparties.co';
 
 const getResponseData = (res) => {
   if (!res.ok) {
@@ -10,7 +10,7 @@ const getResponseData = (res) => {
 }
 
 export const moviesApi = () => {
-  return fetch(`${baseUrlMovies}`, {
+  return fetch(`${baseUrlMovies}/beatfilm-movies`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ function MoviesCardList({films, page}) { // (props)
         (films.length < 1)
         ? <p>Ничего не найдено</p>
         : films.map((film) => (
-          <MoviesCard key={film.id} film={film} page={page} />
+          <MoviesCard key={film.movieId} film={film} page={page} />
         ))
       }
     </section>

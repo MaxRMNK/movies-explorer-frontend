@@ -38,18 +38,20 @@ function App() {
   // const [currentUser, setCurrentUser] = React.useState(defaultUserInfo); // раньше: userInfo
   const [userData, setUserData] = React.useState(defaultUserInfo);
 
-  const [isLoggedIn, setLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
   const [searchQuery, setSearchQuery] = React.useState(''); // Поисковый запрос для "Фильмы"
   const [searchQuerySavedMovies, setSearchQuerySavedMovies] = React.useState(''); // Поисковый запрос для "Сохраненные фильмы"
   const [isToggleMovies, setIsToggleMovies] = React.useState(true); // "Короткометражки" для "Фильмы"
   const [isToggleSavedMovies, setIsToggleSavedMovies] = React.useState(false); // "Короткометражки" для "Сохраненные фильмы"
+
   const [allMovies, setAllMovies] = React.useState([]); // Результат запроса API Movies
+  const [searchMovies, setSearchMovies] = React.useState([]); // Результат запроса API Movies
 
 
   // ----------------------------------------------
 
-  const filmsSaved =  films.filter(function(film) {
+  const filmsSaved = films.filter(function(film) {
     return film.saved === true;
   });
   // console.log(filmsSaved);
@@ -58,14 +60,24 @@ function App() {
   function loadMovies () {
     moviesApi()
       .then((res) => {
-        const mov = films.map((film) => (
-          film.id
-        ))
+        setAllMovies(res.map((item) => ({
+            movieId: item.id,
+            nameRU: item.nameRU,
+            nameEN: item.nameEN,
+            country: item.country,
+            director: item.director,
+            duration: item.duration,
+            year: item.year,
+            description: item.description,
+            image: item.image.url,
+            thumbnail: item.image.formats.thumbnail.url,
+            trailerLink: item.trailerLink,
+          }
+        )))
 
         // setAllMovies(res);
-        console.warn('Фильмы загружены', res);
-        console.warn('Фильмы загружены MOV', mov);
-        // console.log('Фильмы загружены', res);
+        // console.warn('Фильмы загружены', res);
+        // console.warn('Фильмы сохранены MOV', mov);
       })
       .catch((err) => {
         console.log('Фильмы не загрузились', err);
@@ -74,8 +86,24 @@ function App() {
 
 
   function handleSearch (search) {
-    loadMovies(); // Загружаем фильмы
+    loadMovies();
+    // if(allMovies === null) {
+    //   console.log('новый запрос');
+    //   await loadMovies(); // Загружаем фильмы
+    // }
+    // console.log('allMovies', allMovies);
+    // await
   }
+
+  // let movies = [];
+
+  React.useEffect(() => {
+    if (allMovies.length > 1) {
+      setSearchMovies(allMovies.slice(0, 5));
+      console.log('allMovies useEffect', allMovies);
+    }
+  }, [allMovies]);
+  // Запускается при монтировании страницы и изменении allMovies
 
   // ----------------------------------------------
 
@@ -85,7 +113,7 @@ function App() {
     if (token) {
       mainApi.checkToken(token)
       .then((res) => {
-        setLoggedIn(true);
+        setIsLoggedIn(true);
 
         setUserData({
           name: res.name,
@@ -133,7 +161,7 @@ function App() {
     mainApi.loginUser(value)
     .then((data) => {
       if(data.token) {
-        setLoggedIn(true);
+        setIsLoggedIn(true);
         localStorage.setItem('jwt', data.token);
 
         navigate('/movies', { replace: true });
@@ -153,7 +181,7 @@ function App() {
   // Выход
   function handleSignOut() {
     localStorage.removeItem('jwt');
-    setLoggedIn(false);
+    setIsLoggedIn(false);
     setUserData({});
     navigate('/', { replace: true });
   }
@@ -178,6 +206,8 @@ function App() {
       });
   }
 
+  // -------------------------------
+
   React.useEffect(() => {
     checkAuth();
     console.log('checkAuth useEffect');
@@ -191,7 +221,9 @@ function App() {
   }, [isLoggedIn]);
 
 
-  //<React.Fragment></React.Fragment>
+
+  // -----------------------------------------------------------------------------------------------------
+
   return (
     <>
       <Routes>
@@ -207,6 +239,7 @@ function App() {
           <Header isLoggedIn={isLoggedIn} />
           <Movies
             films={films}
+            // films={searchMovies}
             handleSearch={handleSearch}
 
             searchQuery={searchQuery}
