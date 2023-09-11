@@ -32,7 +32,9 @@ class MainApi {
   _getResponseData(res) {
     // console.log('MainApi._getResponseData:', res);
     if (!res.ok) {
-        return Promise.reject(`Ошибка: ${res.status}`);
+        // console.log(res);
+        // return Promise.reject(`Ошибка: ${res.status}`);
+        return Promise.reject(res);
     }
     return res.json();
   }

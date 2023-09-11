@@ -1,15 +1,15 @@
 import React from 'react';
+import { Navigate } from "react-router-dom";
 
 import Logo from "../../Header/Logo/Logo";
 import Auth from "../Auth";
 
-// import './Login.css';
+function Login({ isLoggedIn, handleLogin, isSending, message, setMessage }) {
 
-function Login({ onLogin }) {
-
-  const [formValue, setFormValue] = React.useState({ email: '', password: '' });
+  // const [formValue, setFormValue] = React.useState({ email: '', password: '' });
 
   // const isLoading = false;
+  // const isLoading = true;
 
   // function handleSubmit(e) {
   //   e.preventDefault();
@@ -19,6 +19,9 @@ function Login({ onLogin }) {
   // }
 
   return (
+    isLoggedIn ?
+    <Navigate to="/" replace /> :
+
     <main className="auth">
       <div className="auth__container">
         <div className="auth__logo"><Logo /></div>
@@ -34,9 +37,10 @@ function Login({ onLogin }) {
           link="Регистрация"
           linkTo="/signup"
 
-          submitForm={onLogin}
-          formValue={formValue}
-          setFormValue={setFormValue}
+          submitForm={handleLogin}
+          isSending={isSending}
+          message={message}
+          setMessage={setMessage}
         />
       </div>
     </main>

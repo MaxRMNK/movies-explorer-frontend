@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import './Loader.css';
 
-import Preloader from "../Preloader/Preloader"
+import Preloader from "../../Preloader/Preloader"
 
 function Loader() {
 

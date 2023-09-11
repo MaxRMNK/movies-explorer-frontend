@@ -57,8 +57,8 @@ function MoviesCard({film, page}) {
           <button className={bookmarkButtonClassName} type="button" aria-label={bookmarkButtonLabel} onClick={bookmarkClick} />
       </div>
       <a href="/" className="element__link" target="_blank" rel="noreferrer noopener">
-        <img src={image.url} alt={nameRU} className="element__image" />
-        {/* <img src={`${baseUrlMovies}${image}`} alt={nameRU} className="element__image" /> */}
+        {/* <img src={image.url} alt={nameRU} className="element__image" /> */}
+        <img src={`${baseUrlMovies}${image}`} alt={nameRU} className="element__image" />
       </a>
     </article>
   );

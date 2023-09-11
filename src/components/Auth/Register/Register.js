@@ -1,13 +1,12 @@
 import React from 'react';
+import { Navigate } from "react-router-dom";
 
 import Logo from "../../Header/Logo/Logo";
 import Auth from "../Auth";
 
-// import './Register.css';
+function Register({ isLoggedIn, handleRegister, isSending, message, setMessage }) {
 
-function Register({ onRegister }) {
-
-  const [formValue, setFormValue] = React.useState({ name: '', email: '', password: '' });
+  // const [formValue, setFormValue] = React.useState({ name: '', email: '', password: '' });
 
   // const isLoading = false;
 
@@ -18,6 +17,9 @@ function Register({ onRegister }) {
   // }
 
   return (
+    isLoggedIn ?
+    <Navigate to="/" replace /> :
+
     <main className="auth">
       <div className="auth__container">
         <div className="auth__logo"><Logo /></div>
@@ -30,9 +32,10 @@ function Register({ onRegister }) {
           link="Войти"
           linkTo="/signin"
 
-          submitForm={onRegister}
-          formValue={formValue}
-          setFormValue={setFormValue}
+          submitForm={handleRegister}
+          isSending={isSending}
+          message={message}
+          setMessage={setMessage}
         />
       </div>
     </main>

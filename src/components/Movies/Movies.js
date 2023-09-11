@@ -7,6 +7,7 @@ import Loader from "./Loader/Loader";
 function Movies({
   films,
   handleSearch,
+  isLoading,
   searchQuery, setSearchQuery,
   isToggle, setIsToggle,
 }) {
@@ -23,7 +24,7 @@ function Movies({
         isToggle={isToggle}
         setIsToggle={setIsToggle}
       />
-      <MoviesCardList page='movies' films={films} />
+      <MoviesCardList page='movies' films={films} isLoading={isLoading} />
       <Loader />
     </main>
   );

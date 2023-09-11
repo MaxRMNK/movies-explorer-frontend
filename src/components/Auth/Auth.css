@@ -65,6 +65,7 @@
 
 .auth__input:invalid {
   color: #EE3465;
+  /* border-bottom: 1px solid #EE3465; */
 }
 
 .auth__input:invalid:placeholder-shown {
@@ -76,9 +77,19 @@
   font-size: 10px;
   padding: 6px 0 0;
   display: block;
-  min-height: 12px;
+  /* min-height: 12px; */
+  min-height: 24px;
 }
 
+
+.auth__error-container {
+  /* background-color: #ccc; */
+  /* min-height: 40px; */
+  font-size: 14px;
+  color: #EE3465;
+  padding: 40px 0;
+}
+.auth__error-message {}
 
 .auth__button-container {
   display: flex;
@@ -87,7 +98,8 @@
   flex-grow: 1;
   /* padding: 134px 0 0; */
 
-  padding: 40px 0 70px;
+  /* padding: 40px 0 70px; */
+  padding: 0 0 70px;
   justify-content: flex-end;
 }
 
