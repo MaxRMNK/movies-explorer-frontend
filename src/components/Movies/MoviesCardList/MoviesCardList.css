@@ -2,11 +2,15 @@
   /* margin: 0 70px; */
   padding: 70px 0 30px;
   /* background-color: #c55; */
+
+  width: 100%;
+  flex-grow: 1;
 }
 
 .elements {
   display: grid;
-  justify-content: center;
+  /* justify-content: center; */
+  justify-content: start;
   /* grid-template-columns: repeat(3, 364px); */
   grid-template-columns: repeat(auto-fit, 364px);
   column-gap: 24px;

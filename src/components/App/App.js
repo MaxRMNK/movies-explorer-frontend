@@ -17,7 +17,7 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 // import Preloader from "../Preloader/Preloader";
 import PopupPreloader from "../PopupPreloader/PopupPreloader";
 
-import { MESSAGES } from "../../utils/constants";
+import { MESSAGES, BASE_URL_MOVIES } from "../../utils/constants";
 
 import films from "../../utils/db-films-lite";
 
@@ -26,6 +26,7 @@ import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";
 // import * as auth from "../../utils/auth";
 import { mainApi } from "../../utils/MainApi"
 import { moviesApi } from "../../utils/MoviesApi";
+import { searchMovies } from "../../utils/SearchMovies";
 
 // const defaultUserInfo = {
 //   name: "Виталий",
@@ -44,102 +45,52 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = React.useState(false); // пользователь авторизирован
   const [isLoading, setIsLoading] = React.useState(false); // данные загружаются
+  const [isLoadingFilm, setIsLoadingFilm] = React.useState(false); // данные Фильмов загружаются
   const [isSending, setIsSending] = React.useState(false); // форма отправляется
 
   // Для вывода сообщений об ошибках
   const [messageError, setMessageError] = React.useState(null);
-  // const [messageError, setMessageError] = React.useState(null);
-  // const [messageRegister, setMessageRegister] = React.useState(null);
   const [messageProfile, setMessageProfile] = React.useState({ show: false, successful: true, text: '', });
+  const [messageSearchMovies, setMessageSearchMovies] = React.useState(null);
 
-  const [searchQuery, setSearchQuery] = React.useState(''); // Поисковый запрос для "Фильмы"
-  const [searchQuerySavedMovies, setSearchQuerySavedMovies] = React.useState(''); // Поисковый запрос для "Сохраненные фильмы"
-  const [isToggleMovies, setIsToggleMovies] = React.useState(true); // "Короткометражки" для "Фильмы"
-  const [isToggleSavedMovies, setIsToggleSavedMovies] = React.useState(false); // "Короткометражки" для "Сохраненные фильмы"
+  const [allMovies, setAllMovies] = React.useState([]); // Результат запроса к API Movies
+  const [filtredMovies, setFiltredMovies] = React.useState([]); // Отфильтрованные фильмы
+  // const [filtredMovies, setFiltredMovies] = React.useState( JSON.parse( localStorage.getItem('lastSearchMovies')) || [] ); // Отфильтрованные фильмы
 
-  const [allMovies, setAllMovies] = React.useState([]); // Результат запроса API Movies
-  const [searchMovies, setSearchMovies] = React.useState([]); // Результат запроса API Movies
+  const [moviesInBookmarks, setMoviesInBookmarks] = React.useState([]); // Результат запроса к MainAPI - фильмы в Закладках
+  const [filtredMoviesBookmarks, setFiltredMoviesBookmarks] = React.useState([]); // Отфильтрованные фильмы в Закладках
 
-
-  // ----------------------------------------------
-
-  const filmsSaved = films.filter(function(film) {
-    return film.saved === true;
-  });
-  // console.log(filmsSaved);
-
-
-  function loadMovies () {
-    setIsLoading(true);
-
-    moviesApi()
-      .then((res) => {
-        setAllMovies(res.map((item) => ({
-            movieId: item.id,
-            nameRU: item.nameRU,
-            nameEN: item.nameEN,
-            country: item.country,
-            director: item.director,
-            duration: item.duration,
-            year: item.year,
-            description: item.description,
-            image: item.image.url,
-            thumbnail: item.image.formats.thumbnail.url,
-            trailerLink: item.trailerLink,
-          }
-        )))
-
-        // setAllMovies(res);
-        // console.warn('Фильмы загружены', res);
-        // console.warn('Фильмы сохранены MOV', mov);
-      })
-      .catch((err) => {
-        console.log('Фильмы не загрузились', err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
-  }
+  // Поисковый запрос для "Фильмы"
+  // const [searchQuery, setSearchQuery] = React.useState({
+  //     text: localStorage.getItem('lastSearchQueryText') || '',
+  //     checkbox: localStorage.getItem('lastSearchQueryCheckbox') || false,
+  //   });
+  const [searchQuery, setSearchQuery] = React.useState(
+      JSON.parse(localStorage.getItem('savedSearchQuery')) ||
+      { text: '', checkbox: false, }
+    );
+  // Поисковый запрос для "Сохраненные фильмы"
+  const [searchQueryBookmarks, setSearchQueryBookmarks] = React.useState({
+      text: '',
+      checkbox: false,
+    });
 
 
-  function handleSearch (search) {
-    loadMovies();
-    // if(allMovies === null) {
-    //   console.log('новый запрос');
-    //   await loadMovies(); // Загружаем фильмы
-    // }
-    // console.log('allMovies', allMovies);
-    // await
-  }
 
-  // let movies = [];
 
-  React.useEffect(() => {
-    if (allMovies.length > 1) {
-      setSearchMovies(allMovies.slice(0, 5));
-      console.log('allMovies useEffect', allMovies);
-    }
-  }, [allMovies]);
-  // Запускается при монтировании страницы и изменении allMovies
 
   // =========================================================================
-
   // --------------------------
   // Проверка токена
   function checkAuth() {
     const token = localStorage.getItem('jwt');
-    // const token = ' ';
-    // console.log('function checkAuth - старт', token);
 
     if (token) {
       setIsLoading(true);
-      // console.log('function checkAuth - токен есть');
 
       mainApi.checkToken(token)
       .then((res) => {
-        // console.log('function checkAuth - ушел запрос mainApi.checkToken');
         setIsLoggedIn(true);
-
         setCurrentUser({
           // ...currentUser,
           name: res.name,
@@ -155,11 +106,9 @@ function App() {
         }
       })
       .finally(() => {
-        // console.log('function checkAuth - финальный запрос');
         setIsLoading(false);
       })
     }
-    // console.log('function checkAuth - конец');
   }
 
   // --------------------------
@@ -197,7 +146,7 @@ function App() {
     mainApi.loginUser(value)
     .then((data) => {
       if(data.token) {
-        setIsLoggedIn(true); // ХЗ надо ли. По идее checkAuth дальше авторизирует
+        setIsLoggedIn(true); // checkAuth дальше авторизирует, но без этого работает медленнее.
 
         localStorage.setItem('jwt', data.token);
         checkAuth();
@@ -220,11 +169,10 @@ function App() {
     })
   }
 
-
   // --------------------------
   // Обновление данных пользователя
   function handleUpdateUser(userData) {
-    console.log('handleUpdateUser - начало', userData);
+    // console.log('handleUpdateUser - начало', userData);
     setIsSending(true); // Визуализация процесса отправки
 
     mainApi.setUserInfo(userData)
@@ -243,12 +191,11 @@ function App() {
         } else {
           setMessageProfile({ show: true, successful: false, text: MESSAGES.profileErrorOther, });
         }
-
-        console.log('handleUpdateUser - catch');
-        console.log(err); // выведем ошибку в консоль
+        // console.log('handleUpdateUser - catch');
+        // console.log(err); // выведем ошибку в консоль
       })
       .finally(() => {
-        console.log('handleUpdateUser - finally');
+        // console.log('handleUpdateUser - finally');
         setIsSending(false) // Визуализация процесса отправки
       });
   }
@@ -257,38 +204,284 @@ function App() {
   // Выход
   function handleSignOut() {
     localStorage.removeItem('jwt');
+
     setIsLoggedIn(false);
     setCurrentUser({});
     navigate('/', { replace: true });
+
+    // Добавить очистку localStorage загруженных фильмов и настроек поиска
   }
 
 
+
+  // =========================================================================
+  // --------------------------
+  // Получить все фильмы с "Сервиса beatfilm-movies"
+  function getMovies () {
+    setIsLoadingFilm(true);
+    // setIsLoading(true);
+
+    moviesApi()
+      .then((res) => {
+        // const data = undefined;
+        const data = res.map((item) => ({
+          movieId: item.id,
+          nameRU: item.nameRU,
+          nameEN: item.nameEN,
+          country: item.country,
+          director: item.director,
+          duration: item.duration,
+          year: item.year,
+          description: item.description,
+          image: `${BASE_URL_MOVIES}${item.image.url}`,
+          thumbnail: `${BASE_URL_MOVIES}${item.image.formats.thumbnail.url}`,
+          trailerLink: item.trailerLink,
+        }));
+
+        if (data) {
+          setAllMovies(data);
+          // localStorage.removeItem('savedDataMovies');
+          // localStorage.setItem('savedDataMovies', JSON.stringify(data));
+
+          // Чтобы убрать надпись оставить пробел или изменить условия в MoviesCardList или SearchError
+          setMessageSearchMovies('Первый вход');
+        } else {
+          return Promise.reject({status: 500, statusText: "No Movies Data"});
+        }
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err.status} - ${MESSAGES.searchServerError}`);
+        setMessageSearchMovies(MESSAGES.searchServerError);
+      })
+      .finally(() => {
+        // setIsLoading(false);
+        setIsLoadingFilm(false);
+      })
+  }
+
+
+  // --------------------------
+  // Поиск и фильтрация для Movies
+  function handleSearch (search) {
+    console.log('Пришел поисковый запрос:', search);
+
+    setMessageSearchMovies(null); // Сброс ошибок предыдущего запроса
+
+    // const localSearchQuery = JSON.parse(localStorage.getItem('savedSearchQuery'));
+
+    // Если запрос пустой - обнуляется стейт с фильмами для вывода
+    if (search.text === '') {
+      setFiltredMovies([]);
+      setMessageSearchMovies(MESSAGES.searchValidationError);
+      return
+    }
+
+    // localStorage.setItem('lastSearchQueryText', search.text);
+    // localStorage.setItem('lastSearchQueryCheckbox', search.checkbox);
+    localStorage.setItem('savedSearchQuery', JSON.stringify(search));
+
+    // searchMovies()
+
+    // console.log('handleSearch allMovies', allMovies);
+
+    if (allMovies.length >= 1) {
+      const movieFilterResult = searchMovies( allMovies, search );
+
+      if (movieFilterResult < 1) {
+        setMessageSearchMovies(MESSAGES.searchIsEmpty);
+      }
+
+      localStorage.setItem('lastSearchMovies', JSON.stringify(movieFilterResult));
+      setFiltredMovies(movieFilterResult.slice(0, 20));
+
+      // console.log('allMovies useEffect', allMovies);
+      console.log('movieFilterResult.length:', movieFilterResult);
+    }
+    else {
+      console.log('handleSearch - НЕТ allMovies');
+
+      setFiltredMovies([]);
+      // setMessageSearchMovies(MESSAGES.searchIsEmpty); // Нужна другая ошибка?
+    }
+
+    // const localAllMovies = JSON.parse(localStorage.getItem('savedDataMovies'));
+    // if (localAllMovies) {}
+    // getMovies();
+  }
+
+
+    // --------------------------
+  // Поиск и фильтрация для SavedMovies
+  function handleSearchSavedMovies (search) {
+    setMessageSearchMovies(null); // Сброс ошибок предыдущего запроса
+
+    // Если запрос пустой - обнуляется стейт с фильмами для вывода
+    // if (search.text === '') {
+    //   setFiltredMoviesBookmarks([]);
+    //   setMessageSearchMovies(MESSAGES.searchValidationError);
+    //   return
+    // }
+
+    // Не нужно сохранять - все уже сохранилось через форму при отправке запроса
+    // setSearchQueryBookmarks(search);
+
+    if (moviesInBookmarks.length >= 1) {
+      const movieFilterResult = searchMovies( moviesInBookmarks, search );
+
+      if (movieFilterResult < 1) {
+        setMessageSearchMovies(MESSAGES.searchIsEmpty);
+      }
+
+      // localStorage.setItem('lastSearchMovies', JSON.stringify(movieFilterResult));
+      setFiltredMoviesBookmarks(movieFilterResult);
+
+    } else { // Нет отфильтрованных фильмов - выводим все
+      // setFiltredMoviesBookmarks([]);
+      setFiltredMoviesBookmarks(moviesInBookmarks);
+
+      // console.log('handleSearchSavedMovies - НЕТ moviesInBookmarks');
+      // setMessageSearchMovies(MESSAGES.searchIsEmpty); // Нужна другая ошибка?
+    }
+  }
+
+  // --------------------------
+  // Получить фильмы из закладок
+  function getMoviesFromBookmarks () {
+    setIsLoadingFilm(true);
+
+    mainApi.getBookmarks()
+      .then((res) => {
+        setMoviesInBookmarks(res);
+      })
+      .catch((err) => {
+        if (err.status) {
+          console.log(`Ошибка ${err.status} - ${MESSAGES.errorServer}`);
+        } else {
+          console.log('Ошибка:', err);
+        }
+      })
+      .finally(() => {
+        setIsLoadingFilm(false);
+      })
+  }
+
+  // --------------------------
+  // Добавить фильм в закладки
+  function handleAddMovieInBookmark (filmData) {
+
+    // console.log(filmData);
+    mainApi.addBookmark(filmData)
+      .then((res) => {
+        // console.log('res', res);
+        setMoviesInBookmarks([...moviesInBookmarks, res])
+      })
+      .catch((err) => {
+        if (err.status) {
+          console.log(`Ошибка ${err.status} - ${err.statusText}`);
+        } else {
+          // console.log('Ошибка:', err);
+          console.log('Ошибка:', MESSAGES.errorServer);
+        }
+      })
+  }
+
+  // --------------------------
+  // Удалить фильмы из закладок
+  function handleDeleteMovieFromBookmark (filmData) {
+    const movie = moviesInBookmarks.find((item) => item.movieId === filmData.movieId);
+
+    // console.log('ID', id);
+    mainApi.deleteBookmark(movie._id)
+      .then(() => {
+        setMoviesInBookmarks( moviesInBookmarks.filter( item => item._id !== movie._id ) );
+      })
+      .catch((err) => {
+        if (err.status) {
+          console.log(`Ошибка ${err.status} - ${err.statusText}`);
+        } else {
+          // console.log('Ошибка:', err);
+          console.log('Ошибка:', MESSAGES.errorServer);
+        }
+      })
+  }
+
+  // --------------------------
+  // Проверить наличие фильма в закладках (true/false)
+  function handleCheckMovieInBookmark (filmData) {
+    return moviesInBookmarks.some((item) => {
+      return item.movieId === filmData.movieId
+    });
+  }
+
+  // Запускается при монтировании страницы и изменении allMovies =>
+  // Загружаются сохраненные в localStorage фильтрация и результаты
+  // React.useEffect(() => {
+  //   if (allMovies.length > 1) {
+  //     setFiltredMovies(allMovies.slice(0, 3));
+  //     // console.log('allMovies useEffect', allMovies);
+  //   }
+  //   else {
+  //     setFiltredMovies([]);
+  //   }
+  // }, [ allMovies ]);
+
+
+  // --------------------------
+
+
+
+  // =========================================================================
+  // useEffect
   // -------------------------------
-
-  React.useEffect(() => {
-    console.log('useEffect currentUser', currentUser);
-  }, [ currentUser ]);
-
+  // При открытии страницы проверяет авторизацию (есть ли у пользователя токен) =>
+  // Если "да", обновляет стейты "isLoggedIn" + "currentUser"
   React.useEffect(() => {
     checkAuth();
+
+    // localStorage.removeItem('lastSearchQueryText');
+    // localStorage.removeItem('lastSearchQueryCheckbox');
+    localStorage.removeItem('savedSearchQuery');
+    localStorage.removeItem('lastSearchMovies');
+
+    // setFiltredMovies(JSON.parse(localStorage.getItem('lastSearchMovies')));
+
     // console.log('checkAuth useEffect');
   }, []);
 
-  // React.useEffect(() => {
-  //   issLoading
-  //   // console.log('checkAuth useEffect');
-  // }, [setIsLoading]);
-
+  // Если пользователь авторизован:
+  // + Добавляет токен в заголовки запросов к mainApi
+  // + Загружает фильмы в стейт "allMovies"
+  // + Загружает сохраненные фильмы в стейт "moviesFromBookmarks"
   React.useEffect(() => {
     if(isLoggedIn) {
       mainApi.setToken();
+      getMovies();
+      getMoviesFromBookmarks();
     }
-    // console.log('isLoggedIn => setToken useEffect:', isLoggedIn);
   }, [ isLoggedIn ]);
 
 
+  React.useEffect(() => {
+    setFiltredMoviesBookmarks(moviesInBookmarks);
+    console.log('444');
+  }, [ moviesInBookmarks ]);
 
-  // -----------------------------------------------------------------------------------------------------
+  // -------------------------------
+  // Всякий мусор
+  // -------------------------------
+
+  // React.useEffect(() => {
+  //   console.log('useEffect currentUser', currentUser);
+  // }, [ currentUser ]);
+
+  // Не нужно?
+  // React.useEffect(() => {
+  //   isLoading
+  //   // console.log('checkAuth useEffect');
+  // }, [setIsLoading]);
+
+
+  // =========================================================================
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -348,14 +541,22 @@ function App() {
             <Header isLoggedIn={isLoggedIn} />
             <Movies
               // films={films}
-              films={searchMovies}
+              films={filtredMovies}
+
               handleSearch={handleSearch}
 
-              isLoading={isLoading}
+              handleAddBookmark={handleAddMovieInBookmark}
+              handleDelBookmark={handleDeleteMovieFromBookmark}
+              handleCheckBookmark={handleCheckMovieInBookmark}
+              moviesInBookmarks={moviesInBookmarks}
+
+              message={messageSearchMovies}
+              setMessage={setMessageSearchMovies}
+
+              // isLoading={isLoading}
+              isLoading={isLoadingFilm}
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
-              isToggle={isToggleMovies}
-              setIsToggle={setIsToggleMovies}
               />
             <Footer />
           </ProtectedRouteElement>
@@ -365,12 +566,22 @@ function App() {
           <ProtectedRouteElement isLoggedIn={isLoggedIn}>
             <Header isLoggedIn={isLoggedIn} />
             <SavedMovies
-              films={filmsSaved}
+              films={filtredMoviesBookmarks}
 
-              searchQuery={searchQuerySavedMovies}
-              setSearchQuery={setSearchQuerySavedMovies}
-              isToggle={isToggleSavedMovies}
-              setIsToggle={setIsToggleSavedMovies}
+              handleSearch={handleSearchSavedMovies}
+
+              handleAddBookmark={handleAddMovieInBookmark}
+              handleDelBookmark={handleDeleteMovieFromBookmark}
+              handleCheckBookmark={handleCheckMovieInBookmark}
+              moviesInBookmarks={moviesInBookmarks}
+
+              message={messageSearchMovies}
+              setMessage={setMessageSearchMovies}
+
+              // isLoading={isLoading}
+              isLoading={isLoadingFilm}
+              searchQuery={searchQueryBookmarks}
+              setSearchQuery={setSearchQueryBookmarks}
             />
             <Footer />
           </ProtectedRouteElement>

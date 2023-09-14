@@ -32,18 +32,24 @@ class MainApi {
   _getResponseData(res) {
     // console.log('MainApi._getResponseData:', res);
     if (!res.ok) {
-        // console.log(res);
-        // return Promise.reject(`Ошибка: ${res.status}`);
-        return Promise.reject(res);
+      // console.log(res);
+      // return Promise.reject(`Ошибка: ${res.status}`);
+      return Promise.reject(res);
     }
     return res.json();
   }
 
 
   // ----------------------------------------------------------
+  // ПОСЛЕ аутентификации добавляет токен к заголовкам запросов
+  setToken() { // (token)
+    this._token = localStorage.getItem('jwt');
+    this._headers['authorization'] = `Bearer ${this._token}`;
+  }
+  // ----------------------------------------------------------
 
   // Регистрация пользователя (auth.js)
-  registerUser = ({ name, email, password }) => {
+  registerUser({ name, email, password }) {
     return fetch(`${this._urlApi}/signup`, {
       method: 'POST',
       headers: this._headers,
@@ -53,7 +59,7 @@ class MainApi {
   };
 
   // Авторизация пользователя (auth.js)
-  loginUser = ({ email, password }) => {
+  loginUser({ email, password }) {
     return fetch(`${this._urlApi}/signin`, {
       method: 'POST',
       headers: this._headers,
@@ -63,7 +69,8 @@ class MainApi {
   };
 
   // Проверка токена (auth.js)
-  checkToken = ( token ) => {
+  // В ответе получает данные пользователя
+  checkToken( token ) {
     // console.log('Auth.js, checkToken', token);
     return fetch(`${this._urlApi}/users/me`, {
       // method: 'GET',
@@ -75,24 +82,7 @@ class MainApi {
       .then(this._getResponseData)
   };
 
-  // ----------------------------------------------------------
-
-
-  // ПОСЛЕ аутентификации добавляет токен к заголовкам запросов
-  setToken() { // (token)
-    this._token = localStorage.getItem('jwt');
-    this._headers['authorization'] = `Bearer ${this._token}`;
-  }
-
-  // // получить список всех карточек в виде массива (GET)
-  // getInitialCards() {
-  //   return fetch(`${this._urlApi}/cards`, {
-  //     //method: 'GET',
-  //     headers: this._headers,
-  //   })
-  //     .then(this._getResponseData);
-  // }
-
+  // НЕОБХОДИМО Перепроверить добавление к запросам заголовка токена !!!
   // // получить данные пользователя (GET)
   // getUser() {
   //   return fetch(`${this._urlApi}/users/me`, {
@@ -102,13 +92,8 @@ class MainApi {
   //     .then(this._getResponseData);
   // }
 
-  // // Выводим информацию на страницу только если исполнились оба промиса - загрузка профиля пользователя и загрузка карточек
-  // getAllPageData() {
-  //   return Promise.all([ this.getUser(), this.getInitialCards() ]);
-  // }
-
   // заменить данные пользователя (PATCH)
-  setUserInfo({ name, email }){ //changeUserInfo
+  setUserInfo({ name, email }) { //changeUserInfo
     return fetch(`${this._urlApi}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -120,25 +105,36 @@ class MainApi {
       .then(this._getResponseData);
   }
 
+  // ----------------------------------------------------------
 
-  // // добавить карточку (POST)
-  // addCardInDb(data){
-  //   return fetch(`${this._urlApi}/cards`, {
-  //     method: 'POST',
-  //     headers: this._headers,
-  //     body: JSON.stringify(data)
-  //   })
-  //     .then(this._getResponseData);
-  // }
 
-  // // удалить карточку (DELETE)
-  // deleteCard(id){
-  //   return fetch(`${this._urlApi}/cards/${id}`, {
-  //     method: 'DELETE',
-  //     headers: this._headers,
-  //   })
-  //     .then(this._getResponseData);
-  // }
+  // Получить сохраненные закладки (фильмы)
+  getBookmarks() {
+    return fetch(`${this._urlApi}/movies`, {
+      //method: 'GET',
+      headers: this._headers,
+    })
+      .then(this._getResponseData);
+  }
+
+  // Добавить фильм в закладки (POST)
+  addBookmark(data) {
+    return fetch(`${this._urlApi}/movies`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    })
+      .then(this._getResponseData);
+  }
+
+  // Удалить фильм из закладок (DELETE)
+  deleteBookmark(id) {
+    return fetch(`${this._urlApi}/movies/${id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+      .then(this._getResponseData);
+  }
 
   // // "залайкать" карточку (PUT) + удалить лайк карточки (DELETE)
   // // Раньше метод назывался "setLikeCard", были те же аргументы + изменил условие с "if (!isLiked){..." на "if (isLiked){..."
@@ -156,6 +152,12 @@ class MainApi {
   //     })
   //       .then(this._getResponseData);
   //   }
+  // }
+
+  // // Выводим информацию на страницу только если исполнились оба промиса -
+  // // загрузка профиля пользователя и загрузка карточек.
+  // getAllPageData() {
+  //   return Promise.all([ this.getUser(), this.getInitialCards() ]);
   // }
 
 }

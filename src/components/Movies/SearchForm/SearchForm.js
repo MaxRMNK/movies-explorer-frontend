@@ -1,46 +1,49 @@
 import React from "react";
 
+// import { MESSAGES } from "../../../utils/constants";
+
 import './SearchForm.css';
-
-
-// function handleClick(e) {
-//   // e.preventDefault();
-//   console.log('клик');
-// }
 
 function SearchForm({
   handleSearch,
   searchQuery, setSearchQuery,
-  isToggle, setIsToggle,
 }) {
 
+  const [ text, setText ] = React.useState( searchQuery.text || '');
+  const [ checkbox, setCheckbox ] = React.useState( searchQuery.checkbox || false);
+
+
+  // При клике по кнопку Поиск: Отправляется форма и:
+  // Устанавливаются предыдущее значение чекбокса и текущее значение инпута
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    handleSearch(searchQuery);
-
-    // const {name, value} = evt.target.name;
-    // setSearchQuery();
-    // console.log('поиск 1', evt.target.name);
-    // console.log('поиск 2', evt.target.value);
-    console.log(searchQuery);
+    setSearchQuery({ text, checkbox });
+    handleSearch({ text, checkbox });
+    // setSearchQuery({ ...searchQuery, text });
+    // handleSearch({ ...searchQuery, text });
   }
 
-  const handleChange = (evt) => {
-    // const {name, value} = evt.target;
-    setSearchQuery( evt.target.value );
+  const handleChangeInput = (evt) => { // Строка
+    setText( evt.target.value );
+    // setSearchQuery({ ...searchQuery, text: evt.target.value });
   }
 
-  function handleClick(e) {
-    setIsToggle(!isToggle);
-    // setIsToggle(e.target.checked);
-    // console.log('клик 1', isToggle);
-    // console.log('клик 2', e.target.checked);
+  // При клике по Чекбоксу Отправляется форма и:
+  // Сбрасываются несохраненные введенные значения инпута -
+  // предыдущие значения инпута и текущее значение чекбокса
+  function handleChangeCheckbox(evt) {
+    setCheckbox( evt.target.checked );
+    setText( searchQuery.text );
+
+    handleSearch({ ...searchQuery, checkbox: evt.target.checked });
+    // setSearchQuery({ ...searchQuery, checkbox: evt.target.checked });
   }
 
   // React.useEffect(() => {
-  //   console.log('isToggle useEffect', isToggle);
-  // }, [isToggle]);
+  //   console.log( 'useEffect searchQuery', searchQuery );
+  // }, [searchQuery]);
+
 
   return (
     <section className="search">
@@ -53,12 +56,12 @@ function SearchForm({
               id="search"
               name="search"
               type="text"
-              minLength="2"
-              maxLength="100"
               placeholder="Фильм"
-              spellCheck="true"
-              value={searchQuery}
-              onChange={handleChange}
+              // minLength="1"
+              maxLength="200"
+              // spellCheck="true" // Проверка орфографии
+              value={text}
+              onChange={handleChangeInput}
             />
             <button type="submit" name="Search" className="search__button button" />
           </div>
@@ -67,10 +70,12 @@ function SearchForm({
             <label className="search__label">
               <input
                 className="search__checkbox"
-                placeholder="Короткометражки"
+                id="checkbox"
+                name="checkbox"
                 type="checkbox"
-                checked={isToggle}
-                onChange={handleClick}
+                placeholder="Короткометражки"
+                checked={checkbox}
+                onChange={handleChangeCheckbox}
               />
               <div className="search__toggle"></div>
               <span className="search__toggle-label">Короткометражки</span>
