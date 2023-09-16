@@ -9,7 +9,7 @@ import MoviesCardList from "./MoviesCardList/MoviesCardList";
 // import Preloader from "../Preloader/Preloader";
 // import SearchError from "./SearchError/SearchError";
 
-import { DESKTOP_MIN_WIDTH, TABLET_MIN_WIDTH, MOBILE_MIN_WIDTH,
+import { DESKTOP_MIN_WIDTH, TABLET_MIN_WIDTH, // MOBILE_MIN_WIDTH,
   LG_INITIAL_CARD_COUNT, MD_INITIAL_CARD_COUNT, SM_INITIAL_CARD_COUNT,
   LG_ROW_CARD_COUNT, MD_ROW_CARD_COUNT, SM_ROW_CARD_COUNT } from "../../utils/constants";
 

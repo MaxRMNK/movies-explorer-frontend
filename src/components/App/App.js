@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 // import './App.css';
 
@@ -19,7 +19,7 @@ import PopupPreloader from "../PopupPreloader/PopupPreloader";
 
 import { MESSAGES, BASE_URL_MOVIES } from "../../utils/constants";
 
-import films from "../../utils/db-films-lite";
+// import films from "../../utils/db-films-lite";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRouteElement from "../ProtectedRoute/ProtectedRoute";

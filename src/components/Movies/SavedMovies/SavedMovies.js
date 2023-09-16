@@ -23,6 +23,7 @@ function SavedMovies({
   useEffect(() => {
     // console.log('sdfsdfsd');
     setFiltredMoviesBookmarks(moviesInBookmarks);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
