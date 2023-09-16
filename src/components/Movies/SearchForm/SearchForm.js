@@ -13,42 +13,51 @@ function SearchForm({
   const [ text, setText ] = React.useState( searchQuery.text || '' );
   const [ checkbox, setCheckbox ] = React.useState( searchQuery.checkbox || false );
 
-
   // При клике по кнопку Поиск: Отправляется форма и:
   // Устанавливаются предыдущее значение чекбокса и текущее значение инпута
   function handleSubmit(evt) {
     evt.preventDefault();
 
+    // Не нужно - Обновляю стейт запроса в handleSearch App.js
     setSearchQuery({ text, checkbox });
     handleSearch({ text, checkbox });
-    // setSearchQuery({ ...searchQuery, text });
-    // handleSearch({ ...searchQuery, text });
   }
 
   const handleChangeInput = (evt) => { // Строка
-    setText( evt.target.value );
-    // setSearchQuery({ ...searchQuery, text: evt.target.value });
+    const input = evt.target.value;
+
+    setText( input );
+    // setSearchQuery({ ...searchQuery, text: input });
   }
 
   // При клике по Чекбоксу Отправляется форма и:
   // Сбрасываются несохраненные введенные значения инпута -
-  // предыдущие значения инпута и текущее значение чекбокса
+  // Передаются предыдущие значения инпута и текущее значение чекбокса
   function handleChangeCheckbox(evt) {
-    setCheckbox( evt.target.checked );
+    const toggle = evt.target.checked;
+
+    setCheckbox( toggle );
     setText( searchQuery.text );
 
-    handleSearch({ ...searchQuery, checkbox: evt.target.checked });
-    // setSearchQuery({ ...searchQuery, checkbox: evt.target.checked });
+    // Не нужно - Обновляю стейт запроса в handleSearch App.js
+    // Без этого костыля через setCheckbox не успевает сохраниться правильное значение чекбокса в searchQuery
+    if (searchQuery.text !== '') {
+      setSearchQuery({ ...searchQuery, checkbox: toggle });
+    }
+
+    handleSearch({ ...searchQuery, checkbox: toggle });
+    // setSearchQuery({ ...searchQuery, checkbox: toggle });
   }
 
   // Сбрасывает форму поиска при клике по ссылке в меню или переходе на страницу
   React.useEffect(() => {
     // console.log( 'useEffect searchQuery', searchQuery );
     if (page === 'saved-movies') {
-      setText(searchQuery.text || '');
-      setCheckbox(searchQuery.checkbox || false);
+      setText('');
+      setCheckbox(false);
+      setSearchQuery({ text: '', checkbox: false, });
     }
-  }, [searchQuery, page]);
+  }, [page, setSearchQuery]);
 
 
   return (

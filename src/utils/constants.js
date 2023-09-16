@@ -1,6 +1,6 @@
 // URL Для запроса к API Бэкенда
-// export const BASE_URL = 'http://localhost:3001';
-export const BASE_URL = 'https://api.diplom.maxrmnk.nomoredomains.xyz';
+export const BASE_URL = 'http://localhost:3001';
+// export const BASE_URL = 'https://api.diplom.maxrmnk.nomoredomains.xyz';
 
 // URL Для запроса к API для получения фильмов + Для формирования ссылок на картинки
 export const BASE_URL_MOVIES = 'https://api.nomoreparties.co';
@@ -48,10 +48,6 @@ export const MOBILE_MIN_WIDTH = '(min-width: 320px)';
 export const LG_INITIAL_CARD_COUNT = 12; // 4 ряда по 3 карточки
 export const MD_INITIAL_CARD_COUNT = 8; // 4 ряда по 2 карточки
 export const SM_INITIAL_CARD_COUNT = 5; // 5 рядов по 1 карточке
-
-// export const LG_INITIAL_CARD_COUNT = 3; // 4 ряда по 3 карточки
-// export const MD_INITIAL_CARD_COUNT = 2; // 4 ряда по 2 карточки
-// export const SM_INITIAL_CARD_COUNT = 1; // 5 рядов по 1 карточке
 
 // Количество каточек, которое будет добавляться
 export const LG_ROW_CARD_COUNT = 3; //

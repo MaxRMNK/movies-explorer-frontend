@@ -186,7 +186,7 @@ function App() {
           email: userData.email,
         });
         setMessageProfile({ show: true, successful: true, text: 'Данные профиля обновлены', });
-        console.log('handleUpdateUser - then');
+        // console.log('handleUpdateUser - then');
       })
       .catch((err) => {
         if (err.status === 409) {
@@ -212,6 +212,20 @@ function App() {
     localStorage.removeItem('lastSearchMovies'); // Результаты поиска
     localStorage.removeItem('allFilmsBeatfilm'); // Все фильмы с "Beatfilm"
 
+  //   setMessageError(null);
+  //   setMessageProfile({ show: false, successful: true, text: '', });
+  //   setMessageSearchMovies('');
+  //   setMessageSavedMovies('');
+
+  //   setAllMovies([]);
+  //   setFiltredMovies([]);
+
+  //   setMoviesInBookmarks([]);
+  //   setFiltredMoviesBookmarks([]);
+
+  //   setSearchQuery({ text: '', checkbox: false, });
+  //   setSearchQueryBookmarks({ text: '', checkbox: false, });
+
     setIsLoggedIn(false);
     setCurrentUser({});
     navigate('/', { replace: true });
@@ -222,6 +236,29 @@ function App() {
     // localStorage.clear();
   }
 
+
+  // --------------------------
+  // ТОЛЬКО ДЛЯ РАЗРАБОТКИ
+  // Сброс состояний и данных хранилища (кроме аутентификации)
+  // function handleResetAll() {
+  //   localStorage.removeItem('savedSearchQuery'); // Поисковый запрос
+  //   localStorage.removeItem('lastSearchMovies'); // Результаты поиска
+  //   localStorage.removeItem('allFilmsBeatfilm'); // Все фильмы с "Beatfilm"
+
+  //   setMessageError(null);
+  //   setMessageProfile({ show: false, successful: true, text: '', });
+  //   setMessageSearchMovies('');
+  //   setMessageSavedMovies('');
+
+  //   setAllMovies([]);
+  //   setFiltredMovies([]);
+
+  //   setMoviesInBookmarks([]);
+  //   setFiltredMoviesBookmarks([]);
+
+  //   setSearchQuery({ text: '', checkbox: false, });
+  //   setSearchQueryBookmarks({ text: '', checkbox: false, });
+  // }
 
 
   // =========================================================================
@@ -273,7 +310,7 @@ function App() {
   // --------------------------
   // Поиск и фильтрация для Movies
   function handleSearch (search) {
-    console.log('Пришел поисковый запрос:', search);
+    // console.log('-----------------', search);
 
     setMessageSearchMovies(null); // Сброс текста ошибок предыдущего поиска
 
@@ -286,9 +323,11 @@ function App() {
       return
     }
 
+    // НЕ НУЖНО. Все сохраняется в SearchForm.js
+    // setSearchQuery(search);
     localStorage.setItem('savedSearchQuery', JSON.stringify(search)); // Сохраняет в LS поисковый запрос
 
-    console.log('handleSearch - allMovies.length', allMovies.length);
+    // console.log('handleSearch - allMovies.length', allMovies.length);
 
     if (allMovies.length === 0) {
       setIsLoadingFilm(true);
@@ -316,7 +355,7 @@ function App() {
   React.useEffect(() => {
     if (searchQuery.text !== '') {
       handleSearch(searchQuery);
-      console.log('useEffect - allMovies', allMovies.length);
+      // console.log('useEffect - allMovies', allMovies.length);
     }
     setIsLoadingFilm(false);
 
@@ -334,10 +373,16 @@ function App() {
   function handleSearchSavedMovies (search) {
     setMessageSavedMovies(null); // Сброс ошибок предыдущего запроса
 
-    // Если запрос пустой - обнуляется стейт с фильмами для вывода
+    // Если НЕТ и текста запроса и чекбокса - выводятся все фильмы
+    // Если НЕТ текста запрос, но ЕСТЬ чекбокс - обнуляется стейт с фильмами для вывода и выводится ошибка
+    // Если нужно показывать "короткометражки" не зависимо от наличия текста - закомментировать код ниже:
     if (search.text === '') {
-      setFiltredMoviesBookmarks([]);
-      setMessageSavedMovies(MESSAGES.searchValidationError);
+      if (search.checkbox === true) {
+        setFiltredMoviesBookmarks([]);
+        setMessageSavedMovies(MESSAGES.searchValidationError);
+      } else {
+        setFiltredMoviesBookmarks(moviesInBookmarks);
+      }
       return
     }
 
