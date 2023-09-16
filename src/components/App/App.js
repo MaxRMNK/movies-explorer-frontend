@@ -324,7 +324,7 @@ function App() {
     }
 
     // НЕ НУЖНО. Все сохраняется в SearchForm.js
-    // setSearchQuery(search);
+    setSearchQuery(search);
     localStorage.setItem('savedSearchQuery', JSON.stringify(search)); // Сохраняет в LS поисковый запрос
 
     // console.log('handleSearch - allMovies.length', allMovies.length);
