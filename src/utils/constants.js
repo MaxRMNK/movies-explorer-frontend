@@ -1,3 +1,11 @@
+// URL Для запроса к API Бэкенда
+// export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://api.diplom.maxrmnk.nomoredomains.xyz';
+
+// URL Для запроса к API для получения фильмов + Для формирования ссылок на картинки
+export const BASE_URL_MOVIES = 'https://api.nomoreparties.co';
+// '/beatfilm-movies' - добавляется к URL в MoviesApi
+
 export const MESSAGES = {
   // Страница логина пользователя
   loginIncorrect: 'Вы ввели неправильный логин или пароль.', // 400 (+ 401 ???)
@@ -23,8 +31,6 @@ export const MESSAGES = {
 	errorNotFound: '404 Страница по указанному маршруту не найдена.',
 }
 
-// URL Для запроса к API для получения фильмов + Для формирования ссылок на картинки
-export const BASE_URL_MOVIES = 'https://api.nomoreparties.co';
 
 export const SHORT_FILM_DURATION = 40; // длительность короткометражного фильма
 

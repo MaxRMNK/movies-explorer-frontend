@@ -1,8 +1,9 @@
-// import { apiConfig } from "./utils";
+import { BASE_URL } from "./constants";
 
 const apiConfig = {
-  // baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-62',
-  baseUrl: 'http://localhost:3001',
+  // baseUrl: 'api.diplom.maxrmnk.nomoredomains.xyz',
+  // baseUrl: 'http://localhost:3001',
+  baseUrl: BASE_URL,
   headers: {
     authorization: '',
     'Content-Type': 'application/json',
