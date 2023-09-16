@@ -212,19 +212,19 @@ function App() {
     localStorage.removeItem('lastSearchMovies'); // Результаты поиска
     localStorage.removeItem('allFilmsBeatfilm'); // Все фильмы с "Beatfilm"
 
-  //   setMessageError(null);
-  //   setMessageProfile({ show: false, successful: true, text: '', });
-  //   setMessageSearchMovies('');
-  //   setMessageSavedMovies('');
+    setMessageError(null);
+    setMessageProfile({ show: false, successful: true, text: '', });
+    setMessageSearchMovies('');
+    setMessageSavedMovies('');
 
-  //   setAllMovies([]);
-  //   setFiltredMovies([]);
+    setAllMovies([]);
+    setFiltredMovies([]);
 
-  //   setMoviesInBookmarks([]);
-  //   setFiltredMoviesBookmarks([]);
+    setMoviesInBookmarks([]);
+    setFiltredMoviesBookmarks([]);
 
-  //   setSearchQuery({ text: '', checkbox: false, });
-  //   setSearchQueryBookmarks({ text: '', checkbox: false, });
+    setSearchQuery({ text: '', checkbox: false, });
+    setSearchQueryBookmarks({ text: '', checkbox: false, });
 
     setIsLoggedIn(false);
     setCurrentUser({});
