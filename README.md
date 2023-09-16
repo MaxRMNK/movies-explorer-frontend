@@ -13,4 +13,6 @@ IP 158.160.61.192
 
 Github https://github.com/MaxRMNK/movies-explorer-frontend/tree/level-3
 
+Pull request https://github.com/MaxRMNK/movies-explorer-frontend/pull/2
+
 Backend https://diplom.maxrmnk.nomoredomainsrocks.ru
