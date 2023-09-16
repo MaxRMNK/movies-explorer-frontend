@@ -4,7 +4,7 @@ import { NavLink, Link } from "react-router-dom"; // Routes, Route, useLocation,
 import Logo from "./Logo/Logo";
 import './Header.css';
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, ...props }) {
   // console.log('isLoggedIn', isLoggedIn);
 
   // const location = useLocation().pathname;
@@ -72,6 +72,7 @@ function Header({ isLoggedIn }) {
               >Фильмы</NavLink></li>
             <li className="nav__item nav__item_auth"><NavLink
               to="/saved-movies"
+              onClick={props?.onResetFilter}
               className={({isActive}) => `nav__link link ${isActive ? 'nav__link_active' : ''}`}
               >Сохранённые фильмы</NavLink></li>
             <li className="nav__item nav__item_auth nav__item_profile"><NavLink

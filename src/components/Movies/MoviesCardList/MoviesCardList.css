@@ -9,31 +9,48 @@
 
 .elements {
   display: grid;
-  /* justify-content: center; */
-  justify-content: start;
-  /* grid-template-columns: repeat(3, 364px); */
-  grid-template-columns: repeat(auto-fit, 364px);
+  justify-content: center;
+  /* justify-content: start; */
+  grid-template-columns: repeat(3, 364px);
+  /* grid-template-columns: repeat(auto-fit, 364px); */
   column-gap: 24px;
   row-gap: 30px;
 }
 
-@media (max-width: 930px) {
+/* @media (max-width: 930px) { */
+@media (max-width: 1279px) {
   .elements {
     /* grid-template-columns: repeat(2, 339px); */
-    grid-template-columns: repeat(auto-fit, 336px);
+    /* grid-template-columns: repeat(auto-fit, 336px); */
+    grid-template-columns: repeat(2, 336px);
     column-gap: 30px;
     row-gap: 36px;
   }
 }
 
+/* Раньше не было -> Настройка кнопки ЕЩЕ */
+@media (max-width: 762px) {
+  .movies-card-list {
+    padding: 40px 0 30px;
+  }
+
+  .elements {
+    grid-template-columns: repeat(1, 300px);
+    row-gap: 16px;
+  }
+}
+
+
+/* @media (max-width: 525px) { * -/
 @media (max-width: 525px) {
   .movies-card-list {
     padding: 40px 0 30px;
   }
 
   .elements {
-    /* grid-template-columns: repeat(1, 300px); */
+    /* grid-template-columns: repeat(1, 300px); * -/
     grid-template-columns: repeat(auto-fit, 300px);
     row-gap: 16px;
   }
 }
+*/

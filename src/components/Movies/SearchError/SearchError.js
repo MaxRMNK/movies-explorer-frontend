@@ -1,13 +1,13 @@
 import './SearchError.css';
 
 function SearchError({ message }) {
-  // console.log('message', message);
+  // console.log('SearchError - message:', message);
 
   // if (message === null) {}
 
   return (
     <p className="search-error">
-      { message || 'При загрузке данных произошла ошибка ***'}
+      { message || ' '}
     </p>
   );
 }

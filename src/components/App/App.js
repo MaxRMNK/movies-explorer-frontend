@@ -36,6 +36,9 @@ import { searchMovies } from "../../utils/SearchMovies";
 
 // ------------------------------------------------------------------------
 
+// ВКЛЮЧИ React.StrictMode в index.js !!!!!!!
+
+// ------------------------------------------------------------------------
 
 function App() {
 
@@ -51,29 +54,29 @@ function App() {
   // Для вывода сообщений об ошибках
   const [messageError, setMessageError] = React.useState(null);
   const [messageProfile, setMessageProfile] = React.useState({ show: false, successful: true, text: '', });
-  const [messageSearchMovies, setMessageSearchMovies] = React.useState(null);
+
+  const [messageSearchMovies, setMessageSearchMovies] = React.useState(' ');
+  const [messageSavedMovies, setMessageSavedMovies] = React.useState('Нет сохраненных фильмов');
+
+  // Пользователь еще ничего не искал
+  // Пользователь еще ничего не сохранил
 
   const [allMovies, setAllMovies] = React.useState([]); // Результат запроса к API Movies
   const [filtredMovies, setFiltredMovies] = React.useState([]); // Отфильтрованные фильмы
-  // const [filtredMovies, setFiltredMovies] = React.useState( JSON.parse( localStorage.getItem('lastSearchMovies')) || [] ); // Отфильтрованные фильмы
+  // const [filtredMovies, setFiltredMovies] = React.useState( JSON.parse(localStorage.getItem('lastSearchMovies')) || [] ); // Отфильтрованные фильмы
 
   const [moviesInBookmarks, setMoviesInBookmarks] = React.useState([]); // Результат запроса к MainAPI - фильмы в Закладках
   const [filtredMoviesBookmarks, setFiltredMoviesBookmarks] = React.useState([]); // Отфильтрованные фильмы в Закладках
 
   // Поисковый запрос для "Фильмы"
-  // const [searchQuery, setSearchQuery] = React.useState({
-  //     text: localStorage.getItem('lastSearchQueryText') || '',
-  //     checkbox: localStorage.getItem('lastSearchQueryCheckbox') || false,
-  //   });
   const [searchQuery, setSearchQuery] = React.useState(
       JSON.parse(localStorage.getItem('savedSearchQuery')) ||
       { text: '', checkbox: false, }
     );
   // Поисковый запрос для "Сохраненные фильмы"
-  const [searchQueryBookmarks, setSearchQueryBookmarks] = React.useState({
-      text: '',
-      checkbox: false,
-    });
+  const [searchQueryBookmarks, setSearchQueryBookmarks] = React.useState(
+      { text: '', checkbox: false, }
+    );
 
 
 
@@ -203,13 +206,20 @@ function App() {
   // --------------------------
   // Выход
   function handleSignOut() {
-    localStorage.removeItem('jwt');
+
+    localStorage.removeItem('jwt'); // Токен - аутентификация
+    localStorage.removeItem('savedSearchQuery'); // Поисковый запрос
+    localStorage.removeItem('lastSearchMovies'); // Результаты поиска
+    localStorage.removeItem('allFilmsBeatfilm'); // Все фильмы с "Beatfilm"
 
     setIsLoggedIn(false);
     setCurrentUser({});
     navigate('/', { replace: true });
 
-    // Добавить очистку localStorage загруженных фильмов и настроек поиска
+    // Добавить очистку localStorage загруженных фильмов, настроек поиска и токена
+
+    // Полная очистка localStorage для текущего приложения
+    // localStorage.clear();
   }
 
 
@@ -239,12 +249,12 @@ function App() {
         }));
 
         if (data) {
+          // Сохраняем все фильмы с "beatfilm" в стейт или localStorage?
           setAllMovies(data);
-          // localStorage.removeItem('savedDataMovies');
-          // localStorage.setItem('savedDataMovies', JSON.stringify(data));
+          // localStorage.setItem('allFilmsBeatfilm', JSON.stringify(data));
 
           // Чтобы убрать надпись оставить пробел или изменить условия в MoviesCardList или SearchError
-          setMessageSearchMovies('Первый вход');
+          setMessageSearchMovies('Первый вход111');
         } else {
           return Promise.reject({status: 500, statusText: "No Movies Data"});
         }
@@ -265,62 +275,71 @@ function App() {
   function handleSearch (search) {
     console.log('Пришел поисковый запрос:', search);
 
-    setMessageSearchMovies(null); // Сброс ошибок предыдущего запроса
+    setMessageSearchMovies(null); // Сброс текста ошибок предыдущего поиска
 
-    // const localSearchQuery = JSON.parse(localStorage.getItem('savedSearchQuery'));
-
-    // Если запрос пустой - обнуляется стейт с фильмами для вывода
+    // Если поисковый запрос пустой:
+    // - обнуляется стейт с Стейт с результатами последнего поиска
+    // - устанавливается текст ошибки - 'Нужно ввести ключевое слово'
     if (search.text === '') {
       setFiltredMovies([]);
       setMessageSearchMovies(MESSAGES.searchValidationError);
       return
     }
 
-    // localStorage.setItem('lastSearchQueryText', search.text);
-    // localStorage.setItem('lastSearchQueryCheckbox', search.checkbox);
-    localStorage.setItem('savedSearchQuery', JSON.stringify(search));
+    localStorage.setItem('savedSearchQuery', JSON.stringify(search)); // Сохраняет в LS поисковый запрос
 
-    // searchMovies()
+    console.log('handleSearch - allMovies.length', allMovies.length);
 
-    // console.log('handleSearch allMovies', allMovies);
+    if (allMovies.length === 0) {
+      setIsLoadingFilm(true);
 
-    if (allMovies.length >= 1) {
+      // Проверять локальное хранилище - есть ли фильмы с сервиса "beatfilm-movies".
+      // Если фильмов нет - обращаемся за ними к "Сервису beatfilm-movies"
+      // const films = JSON.parse(localStorage.getItem('allFilmsBeatfilm')) || [];
+      // setAllMovies(films);
+
+      getMovies();
+
+    } else {
+      // Сохраняет в LS и передает в Стейт результаты последнего поиска
       const movieFilterResult = searchMovies( allMovies, search );
 
-      if (movieFilterResult < 1) {
-        setMessageSearchMovies(MESSAGES.searchIsEmpty);
-      }
-
       localStorage.setItem('lastSearchMovies', JSON.stringify(movieFilterResult));
-      setFiltredMovies(movieFilterResult.slice(0, 20));
+      setFiltredMovies(movieFilterResult);
 
-      // console.log('allMovies useEffect', allMovies);
-      console.log('movieFilterResult.length:', movieFilterResult);
+      // Устанавливает текст ошибки, если фильмы не найдены - 'Ничего не найдено'
+      if (movieFilterResult < 1) { setMessageSearchMovies(MESSAGES.searchIsEmpty) }
     }
-    else {
-      console.log('handleSearch - НЕТ allMovies');
-
-      setFiltredMovies([]);
-      // setMessageSearchMovies(MESSAGES.searchIsEmpty); // Нужна другая ошибка?
-    }
-
-    // const localAllMovies = JSON.parse(localStorage.getItem('savedDataMovies'));
-    // if (localAllMovies) {}
-    // getMovies();
   }
 
+  // При обновлении Стейта всех фильмов выполняется повторный поиск
+  React.useEffect(() => {
+    if (searchQuery.text !== '') {
+      handleSearch(searchQuery);
+      console.log('useEffect - allMovies', allMovies.length);
+    }
+    setIsLoadingFilm(false);
 
-    // --------------------------
+    // ???
+    // setFiltredMoviesBookmarks(moviesInBookmarks);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allMovies]);
+
+
+
+  // =========================================================================
+  // --------------------------
   // Поиск и фильтрация для SavedMovies
   function handleSearchSavedMovies (search) {
-    setMessageSearchMovies(null); // Сброс ошибок предыдущего запроса
+    setMessageSavedMovies(null); // Сброс ошибок предыдущего запроса
 
     // Если запрос пустой - обнуляется стейт с фильмами для вывода
-    // if (search.text === '') {
-    //   setFiltredMoviesBookmarks([]);
-    //   setMessageSearchMovies(MESSAGES.searchValidationError);
-    //   return
-    // }
+    if (search.text === '') {
+      setFiltredMoviesBookmarks([]);
+      setMessageSavedMovies(MESSAGES.searchValidationError);
+      return
+    }
 
     // Не нужно сохранять - все уже сохранилось через форму при отправке запроса
     // setSearchQueryBookmarks(search);
@@ -329,7 +348,7 @@ function App() {
       const movieFilterResult = searchMovies( moviesInBookmarks, search );
 
       if (movieFilterResult < 1) {
-        setMessageSearchMovies(MESSAGES.searchIsEmpty);
+        setMessageSavedMovies(MESSAGES.searchIsEmpty);
       }
 
       // localStorage.setItem('lastSearchMovies', JSON.stringify(movieFilterResult));
@@ -340,9 +359,12 @@ function App() {
       setFiltredMoviesBookmarks(moviesInBookmarks);
 
       // console.log('handleSearchSavedMovies - НЕТ moviesInBookmarks');
-      // setMessageSearchMovies(MESSAGES.searchIsEmpty); // Нужна другая ошибка?
+      // setMessageSavedMovies(MESSAGES.searchIsEmpty); // Нужна другая ошибка?
     }
   }
+
+
+  // =========================================================================
 
   // --------------------------
   // Получить фильмы из закладок
@@ -352,6 +374,12 @@ function App() {
     mainApi.getBookmarks()
       .then((res) => {
         setMoviesInBookmarks(res);
+
+        if (filtredMoviesBookmarks.length < 1) {
+          setFiltredMoviesBookmarks(res);
+        } else {
+          setMessageSavedMovies('Нет сохраненных фильмов');
+        }
       })
       .catch((err) => {
         if (err.status) {
@@ -368,11 +396,8 @@ function App() {
   // --------------------------
   // Добавить фильм в закладки
   function handleAddMovieInBookmark (filmData) {
-
-    // console.log(filmData);
     mainApi.addBookmark(filmData)
       .then((res) => {
-        // console.log('res', res);
         setMoviesInBookmarks([...moviesInBookmarks, res])
       })
       .catch((err) => {
@@ -390,10 +415,14 @@ function App() {
   function handleDeleteMovieFromBookmark (filmData) {
     const movie = moviesInBookmarks.find((item) => item.movieId === filmData.movieId);
 
-    // console.log('ID', id);
     mainApi.deleteBookmark(movie._id)
       .then(() => {
         setMoviesInBookmarks( moviesInBookmarks.filter( item => item._id !== movie._id ) );
+
+        if (filtredMoviesBookmarks.length !== 0) {
+          const filtrMovie = filtredMoviesBookmarks.find((item) => item.movieId === filmData.movieId);
+          setFiltredMoviesBookmarks( filtredMoviesBookmarks.filter( item => item._id !== filtrMovie._id ) );
+        }
       })
       .catch((err) => {
         if (err.status) {
@@ -405,12 +434,22 @@ function App() {
       })
   }
 
+
+
+
   // --------------------------
   // Проверить наличие фильма в закладках (true/false)
   function handleCheckMovieInBookmark (filmData) {
     return moviesInBookmarks.some((item) => {
       return item.movieId === filmData.movieId
     });
+  }
+
+
+  // Сброс фильтра и поиска - Для страницы "Сохраненные фильмы"
+  function resetFilterMoviesBookmarks () {
+    setFiltredMoviesBookmarks(moviesInBookmarks);
+    setSearchQueryBookmarks({ text: '', checkbox: false, })
   }
 
   // Запускается при монтировании страницы и изменении allMovies =>
@@ -431,21 +470,14 @@ function App() {
 
 
   // =========================================================================
+
+
   // useEffect
   // -------------------------------
   // При открытии страницы проверяет авторизацию (есть ли у пользователя токен) =>
   // Если "да", обновляет стейты "isLoggedIn" + "currentUser"
   React.useEffect(() => {
     checkAuth();
-
-    // localStorage.removeItem('lastSearchQueryText');
-    // localStorage.removeItem('lastSearchQueryCheckbox');
-    localStorage.removeItem('savedSearchQuery');
-    localStorage.removeItem('lastSearchMovies');
-
-    // setFiltredMovies(JSON.parse(localStorage.getItem('lastSearchMovies')));
-
-    // console.log('checkAuth useEffect');
   }, []);
 
   // Если пользователь авторизован:
@@ -455,30 +487,27 @@ function App() {
   React.useEffect(() => {
     if(isLoggedIn) {
       mainApi.setToken();
-      getMovies();
+      // getMovies();
       getMoviesFromBookmarks();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ isLoggedIn ]);
 
 
-  React.useEffect(() => {
-    setFiltredMoviesBookmarks(moviesInBookmarks);
-    console.log('444');
-  }, [ moviesInBookmarks ]);
+  // НЕ нужно
+  // Работает, но сбрасывается фильтр при удалении карточек из закладок
+  // React.useEffect(() => {
+  //   setFiltredMoviesBookmarks(moviesInBookmarks);
+  // }, [ moviesInBookmarks ]);
 
-  // -------------------------------
-  // Всякий мусор
-  // -------------------------------
 
   // React.useEffect(() => {
-  //   console.log('useEffect currentUser', currentUser);
-  // }, [ currentUser ]);
+  //   console.log('Изменен стейт filtredMoviesBookmarks', filtredMoviesBookmarks);
+  // }, [ filtredMoviesBookmarks ]);
 
-  // Не нужно?
-  // React.useEffect(() => {
-  //   isLoading
-  //   // console.log('checkAuth useEffect');
-  // }, [setIsLoading]);
+
+
+
 
 
   // =========================================================================
@@ -548,7 +577,7 @@ function App() {
               handleAddBookmark={handleAddMovieInBookmark}
               handleDelBookmark={handleDeleteMovieFromBookmark}
               handleCheckBookmark={handleCheckMovieInBookmark}
-              moviesInBookmarks={moviesInBookmarks}
+              // moviesInBookmarks={moviesInBookmarks}
 
               message={messageSearchMovies}
               setMessage={setMessageSearchMovies}
@@ -564,19 +593,21 @@ function App() {
 
         <Route path="/saved-movies" element={
           <ProtectedRouteElement isLoggedIn={isLoggedIn}>
-            <Header isLoggedIn={isLoggedIn} />
+            <Header isLoggedIn={isLoggedIn} onResetFilter={resetFilterMoviesBookmarks} />
             <SavedMovies
               films={filtredMoviesBookmarks}
+
+              setFiltredMoviesBookmarks={setFiltredMoviesBookmarks}
+              moviesInBookmarks={moviesInBookmarks}
 
               handleSearch={handleSearchSavedMovies}
 
               handleAddBookmark={handleAddMovieInBookmark}
               handleDelBookmark={handleDeleteMovieFromBookmark}
               handleCheckBookmark={handleCheckMovieInBookmark}
-              moviesInBookmarks={moviesInBookmarks}
 
-              message={messageSearchMovies}
-              setMessage={setMessageSearchMovies}
+              message={messageSavedMovies}
+              setMessage={setMessageSavedMovies}
 
               // isLoading={isLoading}
               isLoading={isLoadingFilm}

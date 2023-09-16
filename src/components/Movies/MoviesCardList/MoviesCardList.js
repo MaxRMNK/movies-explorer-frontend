@@ -7,17 +7,18 @@ import SearchError from "../SearchError/SearchError";
 
 function MoviesCardList({
     films,
+    // handleClickMore,
+    // summCards
     isLoading,
     page,
     handleAddBookmark, handleDelBookmark, handleCheckBookmark,
     // moviesInBookmarks,
-    message, setMessage, // Ошибки при поиске фильмов
-  }) { // (props)
+    message, // setMessage, // Ошибки при поиске фильмов
+    ...props
+  }) {
 
-  // const noFilm = films.length < 1 && console.log(films)
-  // {isLoading ? (
-  //   <Preloader />
-  // ) : (
+  // console.log('films.length', films.length);
+  // console.log('props.summCards', props.summCards);
 
   return (
     <section className="movies-card-list">
@@ -46,8 +47,9 @@ function MoviesCardList({
             }
           </div>
           { page === 'saved-movies' ? '' :
-            (films.length < 12 ? '' :
-              <Loader />
+            (films.length >= props?.summCards ? '' :
+              // <Loader />
+              <Loader handleClickMore={props?.handleClickMore} />
             )
           }
         </>)
@@ -58,27 +60,3 @@ function MoviesCardList({
 }
 
 export default MoviesCardList;
-
-
-
-// // 5:14
-// return (
-//   <section className="movies-card-list">
-
-//     {/* { isLoading ? (
-//       <Preloader />
-//     ) : ( <> */}
-//       <div className="elements">
-//         {(films.length < 1) ? (
-//           <p>Ничего не найдено</p>
-//         ) : (
-//           films.map((film) => (
-//             <MoviesCard key={film.movieId} film={film} page={page} />
-//           ))
-//         )}
-//       </div>
-//       <Loader />
-//     {/* </>) } */}
-
-//   </section>
-// );

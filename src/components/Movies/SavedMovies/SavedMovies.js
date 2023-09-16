@@ -2,23 +2,34 @@ import './SavedMovies.css';
 
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-// import Loader from "../Loader/Loader";
+import { useEffect } from "react";
 
 function SavedMovies({
   films,
+  setFiltredMoviesBookmarks, moviesInBookmarks,
   isLoading,
   handleSearch,
+  isNew,
 
   handleAddBookmark, handleDelBookmark, handleCheckBookmark,
-  // moviesInBookmarks,
-  message, setMessage, // Ошибки при поиске фильмов
+
+  message, //setMessage, // Ошибки при поиске фильмов
 
   searchQuery, setSearchQuery,
   // isToggle, setIsToggle,
 }) {
+
+
+  useEffect(() => {
+    // console.log('sdfsdfsd');
+    setFiltredMoviesBookmarks(moviesInBookmarks);
+  }, []);
+
+
   return (
     <main className="saved-movies main">
       <SearchForm
+        page='saved-movies'
         handleSearch={handleSearch}
 
         searchQuery={searchQuery}
@@ -36,7 +47,6 @@ function SavedMovies({
 
         message={message}
       />
-      {/* <Loader /> */}
     </main>
   );
 }

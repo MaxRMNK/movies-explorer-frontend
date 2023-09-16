@@ -5,12 +5,13 @@ import React from "react";
 import './SearchForm.css';
 
 function SearchForm({
+  page,
   handleSearch,
   searchQuery, setSearchQuery,
 }) {
 
-  const [ text, setText ] = React.useState( searchQuery.text || '');
-  const [ checkbox, setCheckbox ] = React.useState( searchQuery.checkbox || false);
+  const [ text, setText ] = React.useState( searchQuery.text || '' );
+  const [ checkbox, setCheckbox ] = React.useState( searchQuery.checkbox || false );
 
 
   // При клике по кнопку Поиск: Отправляется форма и:
@@ -40,9 +41,14 @@ function SearchForm({
     // setSearchQuery({ ...searchQuery, checkbox: evt.target.checked });
   }
 
-  // React.useEffect(() => {
-  //   console.log( 'useEffect searchQuery', searchQuery );
-  // }, [searchQuery]);
+  // Сбрасывает форму поиска при клике по ссылке в меню или переходе на страницу
+  React.useEffect(() => {
+    // console.log( 'useEffect searchQuery', searchQuery );
+    if (page === 'saved-movies') {
+      setText(searchQuery.text || '');
+      setCheckbox(searchQuery.checkbox || false);
+    }
+  }, [searchQuery, page]);
 
 
   return (
