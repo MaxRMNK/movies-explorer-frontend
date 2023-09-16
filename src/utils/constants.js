@@ -1,6 +1,6 @@
 // URL Для запроса к API Бэкенда
-export const BASE_URL = 'http://localhost:3001';
-// export const BASE_URL = 'https://api.diplom.maxrmnk.nomoredomains.xyz';
+// export const BASE_URL = 'http://localhost:3001';
+export const BASE_URL = 'https://api.diplom.maxrmnk.nomoredomains.xyz';
 
 // URL Для запроса к API для получения фильмов + Для формирования ссылок на картинки
 export const BASE_URL_MOVIES = 'https://api.nomoreparties.co';
