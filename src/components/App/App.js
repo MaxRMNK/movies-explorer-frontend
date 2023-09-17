@@ -324,7 +324,7 @@ function App() {
     }
 
     // НЕ НУЖНО. Все сохраняется в SearchForm.js
-    setSearchQuery(search);
+    // setSearchQuery(search);
     localStorage.setItem('savedSearchQuery', JSON.stringify(search)); // Сохраняет в LS поисковый запрос
 
     // console.log('handleSearch - allMovies.length', allMovies.length);
@@ -371,20 +371,20 @@ function App() {
   // --------------------------
   // Поиск и фильтрация для SavedMovies
   function handleSearchSavedMovies (search) {
-    setMessageSavedMovies(null); // Сброс ошибок предыдущего запроса
+    setMessageSavedMovies('Ничего не найдено'); // Сброс ошибок предыдущего запроса
 
     // Если НЕТ и текста запроса и чекбокса - выводятся все фильмы
     // Если НЕТ текста запрос, но ЕСТЬ чекбокс - обнуляется стейт с фильмами для вывода и выводится ошибка
     // Если нужно показывать "короткометражки" не зависимо от наличия текста - закомментировать код ниже:
-    if (search.text === '') {
-      if (search.checkbox === true) {
-        setFiltredMoviesBookmarks([]);
-        setMessageSavedMovies(MESSAGES.searchValidationError);
-      } else {
-        setFiltredMoviesBookmarks(moviesInBookmarks);
-      }
-      return
-    }
+    // if (search.text === '') {
+    //   if (search.checkbox === true) {
+    //     setFiltredMoviesBookmarks([]);
+    //     setMessageSavedMovies(MESSAGES.searchValidationError);
+    //   } else {
+    //     setFiltredMoviesBookmarks(moviesInBookmarks);
+    //   }
+    //   return
+    // }
 
     // Не нужно сохранять - все уже сохранилось через форму при отправке запроса
     // setSearchQueryBookmarks(search);
@@ -468,6 +468,9 @@ function App() {
           const filtrMovie = filtredMoviesBookmarks.find((item) => item.movieId === filmData.movieId);
           setFiltredMoviesBookmarks( filtredMoviesBookmarks.filter( item => item._id !== filtrMovie._id ) );
         }
+        // else {
+        //   console.log('dsdfsfsdf sdfsd f');
+        // }
       })
       .catch((err) => {
         if (err.status) {
