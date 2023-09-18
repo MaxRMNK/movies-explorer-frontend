@@ -571,7 +571,6 @@ function App() {
         </>} />
 
         <Route path="/signin" element={
-        // isLoggedIn ? (
           <Login
             isLoggedIn={isLoggedIn}
             handleLogin={handleLogin}
@@ -579,13 +578,9 @@ function App() {
             message={messageError}
             setMessage={setMessageError}
           />
-        // ) : (
-        //   <Navigate to="/" replace />
-        // )
         } />
 
         <Route path="/signup" element={
-        // isLoggedIn ? (
           <Register
             isLoggedIn={isLoggedIn}
             handleRegister={handleRegister}
@@ -593,9 +588,6 @@ function App() {
             message={messageError}
             setMessage={setMessageError}
           />
-        // ) : (
-        //   <Navigate to="/" replace />
-        // )
         } />
 
         <Route path="/profile" element={

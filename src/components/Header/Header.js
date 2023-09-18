@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { NavLink, Link } from "react-router-dom"; // Routes, Route, useLocation,
+import { useEffect, useState } from 'react';
+import { NavLink, Link, useLocation } from "react-router-dom"; // Routes, Route, useLocation,
 
 import Logo from "./Logo/Logo";
 import './Header.css';
 
 function Header({ isLoggedIn, ...props }) {
   // console.log('isLoggedIn', isLoggedIn);
+  // console.log('props', props);
 
-  // const location = useLocation().pathname;
-  // // console.log(location);
+  const location = useLocation().pathname.substring(1);
   // const pathName = location.substring(1);
+  // console.log('pathName', pathName);
 
 
   const [btnStatus, setBtnStatus] = useState(false);
@@ -18,12 +19,14 @@ function Header({ isLoggedIn, ...props }) {
     setBtnStatus(formEdit => !formEdit);
   }
 
-  /**
-   * Для главной: Лого + Регистрация + Вход
-   * Для Вход и Регистрация: только Лого (+ изменить отступы у хэадера)
-   * Для Фильмов, Сохраненок и Аккаунта: Фильмы + Сохраненки + Аккаунт
-   * Для остальных (404): Ничего
-   */
+  // Без этого, на планшетах и телефонах не закрывалось мобильное меню при переходе по страницам
+  // --
+  // Вместо принудительного сброса для перехода по внутренним страницам, наверное, правильнее
+  // было бы использовать Link, а не NavLink.
+  useEffect(() => {
+    setBtnStatus(false);
+  }, [location]);
+
 
   return (
     // <header className={`header ${pathName !== '' ? ('header__'+pathName) : ''} ${isLoggedIn ? 'header_logged' : ''}`}>
@@ -61,7 +64,6 @@ function Header({ isLoggedIn, ...props }) {
           />
 
           <ul className="nav__list nav__list_auth">
-          {/* <ul className={`nav__list ${btnStatus ? 'nav__list_open' : ''}`}> */}
             <li className="nav__item nav__item_auth nav__item_hide-full-screen"><NavLink
               to="/"
               className={({isActive}) => `nav__link link ${isActive ? 'nav__link_active' : ''}`}
