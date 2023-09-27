@@ -66,6 +66,7 @@
   }
   .form__input-text:invalid {
     color: #EE3465;
+    border-bottom: 1px solid #EE3465;
   }
 
   .input-text_align_right {
@@ -76,12 +77,27 @@
     color: #EE3465;
     font-size: 10px;
     padding: 6px 0 0;
+
+    display: block;
+    /* min-height: 12px; */
+    /* min-height: 24px; */
+
   }
+
+.profile__message-container {
+  font-size: 14px;
+  color: #EE3465;
+  padding: 40px 0;
+}
+.profile__message_ok {
+  color: #000;
+}
 
 .profile__buttons {
   display: flex;
   flex-direction: column;
-  padding: 40px 0 60px;
+  /* padding: 40px 0 60px; */
+  padding: 0 0 60px;
 
   flex-grow: 1;
   justify-content: flex-end;

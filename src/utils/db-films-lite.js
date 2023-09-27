@@ -1,6 +1,6 @@
 const films = [
   {
-    "id": 1,
+    "imovieIdd": 1,
     "nameRU": "«Роллинг Стоунз» в изгнании",
     "duration": 61,
     "image": {
@@ -10,7 +10,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 2,
+    "movieId": 2,
     "nameRU": "All Tomorrow's Parties - Очень длинный заголовок",
     "duration": 82,
     "image": {
@@ -20,7 +20,7 @@ const films = [
     "saved": true,
   },
   {
-    "id": 3,
+    "movieId": 3,
     "nameRU": " Без обратного пути",
     "duration": 104,
     "image": {
@@ -30,7 +30,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 4,
+    "movieId": 4,
     "nameRU": "Bassweight",
     "duration": 51,
     "image": {
@@ -40,7 +40,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 5,
+    "movieId": 5,
     "nameRU": "Taqwacore: The Birth of Punk Islam",
     "duration": 80,
     "image": {
@@ -50,7 +50,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 6,
+    "movieId": 6,
     "nameRU": "Фавела на взрыве",
     "duration": 40,
     "image": {
@@ -60,7 +60,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 7,
+    "movieId": 7,
     "nameRU": "Постеры, сошедшие со стен",
     "duration": 72,
     "image": {
@@ -70,7 +70,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 8,
+    "movieId": 8,
     "nameRU": "Soul Power",
     "duration": 92,
     "image": {
@@ -80,7 +80,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 9,
+    "movieId": 9,
     "nameRU": "196 ударов в минуту",
     "duration": 60,
     "image": {
@@ -90,7 +90,7 @@ const films = [
     "saved": true,
   },
   {
-    "id": 10,
+    "movieId": 10,
     "nameRU": "Hit So Hard: Школа жизни Патти Шемель",
     "duration": 103,
     "image": {
@@ -100,7 +100,7 @@ const films = [
     "saved": true,
   },
   {
-    "id": 11,
+    "movieId": 11,
     "nameRU": "Баллада о Дженезисе и Леди Джей",
     "duration": 65,
     "image": {
@@ -110,7 +110,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 12,
+    "movieId": 12,
     "nameRU": "Виллалобос",
     "duration": 210,
     "image": {
@@ -120,7 +120,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 13,
+    "movieId": 13,
     "nameRU": "Между дьяволом и глубоким синим морем",
     "duration": 59,
     "image": {
@@ -130,7 +130,7 @@ const films = [
     "saved": false,
   },
   {
-    "id": 14,
+    "movieId": 14,
     "nameRU": "Ритмы свободы",
     "duration": 73,
     "image": {

@@ -1,0 +1,14 @@
+.popup {
+  background-color: rgb(255 255 255 / 0.9);
+  position: fixed;
+  inset: 0; /*top:0; bottom:0; right:0; left:0;*/
+  /*display: none;*/
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+  /* visibility: hidden; */
+  /* opacity: 0; */
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+}

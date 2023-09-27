@@ -1,30 +1,31 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 import './Loader.css';
 
-import Preloader from "../Preloader/Preloader"
+// import Preloader from "../../Preloader/Preloader"
 
-function Loader() {
+function Loader({ handleClickMore }) {
 
-  const [load, setLoad] = useState(false);
+  // const [load, setLoad] = useState(false);
 
-  function moreClick(e) {
-    // e.preventDefault();
-    setTimeout(() => {
-      setLoad(false);
-      console.log('Возвращаю кнопку');
-    }, 5000)
+  // function moreClick(e) {
+  //   // e.preventDefault();
+  //   setTimeout(() => {
+  //     setLoad(false);
+  //     console.log('Возвращаю кнопку');
+  //   }, 5000)
 
-    setLoad(true);
-    console.log('Показываю прелоадер 5 сек');
-  }
+  //   setLoad(true);
+  //   console.log('Показываю прелоадер 5 сек');
+  // }
 
   return (
     <section className="loader">
-      { load
+      <button className="loader__more-button button" type="button" aria-label="Загрузить ещё" onClick={handleClickMore}>Ещё</button>
+      {/* { load
         ? <Preloader />
         : <button className="loader__more-button button" type="button" aria-label="Загрузить ещё" onClick={moreClick}>Ещё</button>
-      }
+      } */}
     </section>
   );
 }

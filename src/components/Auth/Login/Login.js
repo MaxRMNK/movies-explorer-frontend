@@ -1,19 +1,27 @@
+import React from 'react';
+import { Navigate } from "react-router-dom";
+
 import Logo from "../../Header/Logo/Logo";
 import Auth from "../Auth";
 
-// import './Login.css';
+function Login({ isLoggedIn, handleLogin, isSending, message, setMessage }) {
 
-function Login() {
+  // const [formValue, setFormValue] = React.useState({ email: '', password: '' });
 
   // const isLoading = false;
+  // const isLoading = true;
 
   // function handleSubmit(e) {
   //   e.preventDefault();
-  //   console.log('Отправка формы входа');
+  //   console.log('Отправка формы входа', e);
   //   // setFormEdit(false);
+  //   // onLogin(values);
   // }
 
   return (
+    isLoggedIn ?
+    <Navigate to="/" replace /> :
+
     <main className="auth">
       <div className="auth__container">
         <div className="auth__logo"><Logo /></div>
@@ -28,7 +36,11 @@ function Login() {
           caption="Ещё не зарегистрированы?"
           link="Регистрация"
           linkTo="/signup"
-          // sdfsdf="sdfsdfseeeee"
+
+          submitForm={handleLogin}
+          isSending={isSending}
+          message={message}
+          setMessage={setMessage}
         />
       </div>
     </main>

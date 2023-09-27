@@ -6,3 +6,13 @@ https://www.figma.com/file/5RLXSagr9Xm3GtsuEyAgMc/Diploma-(Copy)?type=design&mod
 
 Fig: https://disk.yandex.ru/d/39J6M3yp30sB4w
 Zip: https://disk.yandex.ru/d/V1MMB0HamYTJuA
+
+
+## Ссылки на проект
+IP 158.160.61.192
+
+Github https://github.com/MaxRMNK/movies-explorer-frontend/tree/level-3
+
+Pull request https://github.com/MaxRMNK/movies-explorer-frontend/pull/2
+
+Backend https://diplom.maxrmnk.nomoredomainsrocks.ru
